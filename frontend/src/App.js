@@ -1,23 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import React from 'react';
+import Create from './signin.component';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {
+  Container, Row, Col, Form, Input, Button, Navbar, Nav,
+  NavbarBrand, NavLink, NavItem, UncontrolledDropdown,
+  DropdownToggle, DropdownMenu, DropdownItem
+} from 'react-bootstrap';
+
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className=".App min-vh-100 d-flex justify-content-center align-items-center">
+        <Create/>
     </div>
   );
 }
