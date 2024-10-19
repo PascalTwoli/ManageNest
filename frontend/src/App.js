@@ -8,16 +8,24 @@ import {
   DropdownToggle, DropdownMenu, DropdownItem
 } from 'react-bootstrap';
 import Signup from './signup.component';
-// import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Navigate} from 'react-router-dom';
 
 
-
+// window.React1 = require('react');
 
 function App() {
   return (
-    <div className=".App min-vh-100 d-flex justify-content-center align-items-center">
-        <Signup/>
-    </div>
+
+        <Router>
+            <div>
+              <Routes>
+                <Route  path="/" element={<Navigate to="/signup" />}/>
+                <Route path='/signup' element={<Signup/>}/>
+                <Route path='/signin' element={<Signin/>}/>
+              </Routes>
+            </div>
+        </Router>
+
   );
 }
 

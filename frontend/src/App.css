@@ -15,6 +15,7 @@
   border-radius: 10px;
   /* padding: 100px 120px !important; */
   height: 90vh !important;
+  margin-top: 40px;
   
 }
 
@@ -54,7 +55,7 @@
   border-radius: 10px;
   margin-left:10rem;
   /* margin-left: 7.5%; */
-  margin-top: 30px !important;
+  margin-top: 20px !important;
   margin-bottom: 0px;
   max-width: 29.5rem !important;
   height: 85vh;
