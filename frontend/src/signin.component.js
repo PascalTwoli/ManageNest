@@ -1,18 +1,17 @@
 import { Button, ButtonGroup, Dropdown, Form } from "react-bootstrap";
 import logo from './logo.jpeg';
 
-const Create = () => {
+const Signin = () => {
  return(
     <div className="container container1">
         <div className="row d-flex">
             <div className="col-md-6">
                 <div>
-                    <img src={logo} className="logo"/>
+                    <img src={logo} alt="" className="logo"/>
                 </div>
                 <div className="class-for-form">
                     <h1 className="text-primary sign-in-h1">Sign into ManageNest</h1>
-                    <p className="text-default text-1">or use your e-mail account</p>
-                    
+                    <p className="text-default text-1">or use your e-mail account</p>                    
                     <Form>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label as="p" variant="text-primary" className="form-label text-primary">Email</Form.Label>
@@ -24,8 +23,9 @@ const Create = () => {
                             <Form.Control type="password" placeholder="Password" className="form-input" />
                         </Form.Group>
                         <Button variant="primary" className="submit-btn" type="submit">
-                            Submit
-                        </Button>
+                            Sign in
+                        </Button> <br /> <br />
+                        <Form.Text as="a" className="text-primary">Forgot password?</Form.Text>
                     </Form>
                 </div>
             </div>
@@ -40,4 +40,4 @@ const Create = () => {
  );
 }
 
-export default Create;
+export default Signin;
