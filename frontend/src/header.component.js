@@ -1,5 +1,6 @@
 import logo from './logo.jpeg';
 import { GoSearch, GoMail, GoLocation, GoBell, GoPersonFill } from "react-icons/go";
+import photos from './photos.jpg'
 
 
 const Bodyheader = () => {
@@ -22,7 +23,7 @@ const Bodyheader = () => {
             <div className='d-flex right' >
                 <GoMail size={28}/>
                 <GoBell size={28}/>
-                <GoPersonFill size={28} />
+                <img src={photos} className='profile'/>
             </div>
         </div>
     ); 

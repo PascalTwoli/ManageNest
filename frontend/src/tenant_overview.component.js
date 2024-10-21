@@ -1,19 +1,13 @@
-import { IoMdAddCircleOutline } from "react-icons/io";
+import TenantOverviewTable from "./tenant_overview_table.component";
+import TenantOverviewHeader from "./tenant_overview_header.component";
 
 const TenantOverview = () => {
     return (
-        <div>
-            <div>
-                <h3>Tenants</h3>
-            </div>
-            <div className="d-flex">
-                <h6>Tenants overview</h6>
-                <div>
-                    <IoMdAddCircleOutline/>
-                    <button>Add Tenant</button>
-                </div>
-            </div>
-            <div></div>
+        <div className="tenants-container">
+            <TenantOverviewHeader/>
+            <TenantOverviewTable/>
         </div>
     );
 }
+
+export default TenantOverview;

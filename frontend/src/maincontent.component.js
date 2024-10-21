@@ -1,4 +1,5 @@
 import Sidebar from './Sidebar.component';
+import TenantOverview from './tenant_overview.component';
 
 
 
@@ -10,8 +11,8 @@ const Maincontent = () => {
       {/* Sidebar */}
       <Sidebar/>
       {/* Main Content */}
-      <div className="flex-grow-1 p-3">
-        <h1>this is the main content area</h1>
+      <div className="flex-grow-1 p-3 main-content-container">
+        <TenantOverview/>
       </div>
     </div>
   );
