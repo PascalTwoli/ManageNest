@@ -1,14 +1,13 @@
-import Sidebar from "./sidebar.component";
+import Maincontent from "./maincontent.component";
+import Bodyheader from "./header.component";
 
 const Mainbody = () => {
-    return(
-        <div className="">
-            <header>
-                <h2>This is the header of ManageNest</h2>
-            </header>
-            <Sidebar></Sidebar>
-        </div>
-    );
-}
+	return (
+		<div className="">
+			<Bodyheader />
+			<Maincontent />
+		</div>
+	);
+};
 
 export default Mainbody;

@@ -26,7 +26,7 @@ import {
 	Route,
 	Navigate,
 } from "react-router-dom";
-import Sidebar from "./sidebar.component";
+import Sidebar from "./maincontent.component";
 import Mainbody from "./mainbody.component";
 
 // window.React1 = require('react');

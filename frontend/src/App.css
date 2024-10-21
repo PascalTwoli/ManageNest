@@ -125,14 +125,86 @@
 
 /* --------- sidebar.component.js ------------ */
 .side-bar{
-  background-color: lightgrey;
-  color: green !important;
-  border-right: solid 1px grey !important;
+  border-right: solid 1px lightgrey !important;
+  row-gap: 70px !important; 
 }
 
 .sidebar-toggle-btn{
   border-radius: 60% !important;
-  margin-left: 80% !important;
+  padding: 0px 0px 0px 3px !important;
+  right: -20px;
+  top: 0px !important;
+  height: 25px;
+  width: 25px;
+}
+
+.sidebar-div{
+  display: flex;
+  margin-left: 10px;
+  color: black;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 5px;
+  box-shadow: 0px 2px 3px 3px lightgrey;
+  margin-right: 20px;
+  border-radius: 5px; 
+}
+
+.sidebar-labels{
+  color: grey;
 }
 
 
+/* -------------- header.component.css ------------ */
+.header-container .logo{
+  height: 80px;
+}
+.header-container{
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0px !important;
+  border-bottom: solid lightgrey 1px;
+  gap: 10rem;
+}
+
+.header-container .left{
+  align-items: center;
+  flex: 2;
+}
+.header-container .left h1{
+  font-size: 40px; 
+  font-weight: 700;
+}
+
+.header-container .search-container{
+  align-items: center;
+  flex: 3;
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+}
+
+.header-container .search-container div{
+  flex: 1;
+  padding-left: 4px;
+}
+.header-container .search-container input{
+  outline: none;
+  border: none;
+  width: 92%;
+}
+
+.header-container .search-container button{
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+.header-container .right{
+  align-items: center;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.header-container .right{
+  
+  font-weight: 900;
+}
