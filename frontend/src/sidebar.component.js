@@ -8,17 +8,19 @@ import { IoDocumentTextSharp } from "react-icons/io5";
 import { IoMdPeople } from "react-icons/io";
 
 
-const Sidebar1 = () => {
+const Sidebar = ({ onSelectComponent }) => {
 
     const [expanded, setExpanded] = useState(true);
 
-
     // Toggle the expanded state
+    
     const toggleSidebar = () => {
       setExpanded(!expanded);
     };
+
+    
     return (
-        <div
+      <div
         style={{
           width: expanded ? '250px' : '80px', // Width toggle
           transition: 'width 0.3s', // Smooth transition
@@ -34,29 +36,30 @@ const Sidebar1 = () => {
         </Button>
         <Nav className="flex-column">
           {/* Icons and text, toggle text visibility based on the state */}
-          <Nav.Item className="d-flex align-items-center my-2 sidebar-div">
+          <Nav.Item className="d-flex align-items-center my-2 sidebar-div" onClick={() => onSelectComponent('tenant')}>
             < RiLayoutFill  className="me-2 sidebar-labels text-primary" size={24} />
             {expanded && <span>Tenants overview</span>}
           </Nav.Item><br/>
-          <Nav.Item className="d-flex align-items-center my-2 sidebar-div">
+          <Nav.Item className="d-flex align-items-center my-2 sidebar-div" onClick={() => onSelectComponent('reports')}>
             <SiReadthedocs className="me-2 sidebar-labels text-primary" size={24} />
             {expanded && <span>Reports and statements</span>}
           </Nav.Item><br/>
-          <Nav.Item className="d-flex align-items-center my-2 sidebar-div">
+          <Nav.Item className="d-flex align-items-center my-2 sidebar-div" onClick={() => onSelectComponent('lease')}>
             <IoDocumentTextSharp className="me-2 sidebar-labels text-primary" size={24} />
             {expanded && <span>Lease</span>}
           </Nav.Item><br/>
-          <Nav.Item className="d-flex align-items-center my-2 sidebar-div">
+          <Nav.Item className="d-flex align-items-center my-2 sidebar-div" onClick={() => onSelectComponent('settings')}>
             <FaCog className="me-2 sidebar-labels text-primary" size={24} />
             {expanded && <span>Settings</span>}
           </Nav.Item><br/>
-          <Nav.Item className="d-flex align-items-center my-2 sidebar-div">
+          <Nav.Item className="d-flex align-items-center my-2 sidebar-div" onClick={() => onSelectComponent('support')}>
             <IoMdPeople  className="me-2 sidebar-labels text-primary" size={24} />
             {expanded && <span>Support</span>}
           </Nav.Item><br/>
         </Nav>
+
       </div>
     );
 }
 
-export default Sidebar1;
+export default Sidebar;

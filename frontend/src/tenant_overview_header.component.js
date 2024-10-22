@@ -1,7 +1,18 @@
 import { IoMdAddCircleOutline, IoIosPeople, IoMdPerson } from "react-icons/io";
 import { MdAttachMoney, MdOutlinePerson } from "react-icons/md";
+import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Offcanvas from 'react-bootstrap/Offcanvas';
+import OffCanvasModal from './offcanvas.component';
 
 const TenantOverviewHeader = () => {
+
+    // State controlling the offcanvas visibility
+    const [showOffcanvas, setShowOffcanvas] = useState(false);
+
+    const handleShow = () => setShowOffcanvas(true);
+    const handleClose = () => setShowOffcanvas(false);
+
     return (
         <div className="TenantOverviewHeader">
             <div>
@@ -9,10 +20,12 @@ const TenantOverviewHeader = () => {
             </div>
             <div className="d-flex tenant_overview_head1">
                 <h6>Tenants overview</h6>
-                <div className="btn btn-primary add-tenant-btn d-flex">
+                <div className="btn btn-primary add-tenant-btn d-flex" onClick={handleShow}>
                     <IoMdAddCircleOutline/>
                     <span className="">Add Tenant</span>
                 </div>
+                {/* rendering the offcanvas */}
+                <OffCanvasModal show={showOffcanvas} handleClose={handleClose} />
             </div>
             {/* container for the totals */}
             <div className="d-flex totals-div">
