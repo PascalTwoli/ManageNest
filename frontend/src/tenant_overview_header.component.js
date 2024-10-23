@@ -1,8 +1,6 @@
 import { IoMdAddCircleOutline, IoIosPeople, IoMdPerson } from "react-icons/io";
 import { MdAttachMoney, MdOutlinePerson } from "react-icons/md";
 import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Offcanvas from 'react-bootstrap/Offcanvas';
 import OffCanvasModal from './offcanvas.component';
 
 const TenantOverviewHeader = () => {

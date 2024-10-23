@@ -16,7 +16,7 @@ const Maincontent = () => {
 	};
 
 	return (
-		<div className={`d-flex`}>
+		<div className="d-flex mainContentContainer">
 			{/* Sidebar */}
 			<Sidebar onSelectComponent={handleSelectComponent} />
 			{/* Main Content */}

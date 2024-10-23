@@ -33,17 +33,19 @@ import Mainbody from "./mainbody.component";
 
 function App() {
 	return (
-		<Router>
-			<div>
-				<Routes>
-					<Route path="/" element={<Navigate to="/mainbody" />} />
-					<Route path="/signup" element={<Signup />} />
-					<Route path="/signin" element={<Signin />} />
-					<Route path="/sidebar" element={<Sidebar />} />
-					<Route path="/mainbody" element={<Mainbody />} />
-				</Routes>
-			</div>
-		</Router>
+		<div className="App">
+			<Router>
+				<div>
+					<Routes>
+						<Route path="/" element={<Navigate to="/signin" />} />
+						<Route path="/signup" element={<Signup />} />
+						<Route path="/signin" element={<Signin />} />
+						<Route path="/sidebar" element={<Sidebar />} />
+						<Route path="/mainbody" element={<Mainbody />} />
+					</Routes>
+				</div>
+			</Router>
+		</div>
 	);
 }
 

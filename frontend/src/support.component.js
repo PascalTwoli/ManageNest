@@ -4,7 +4,7 @@ const SupportForManageNest = () => {
         <div>
             <div>
                 <h4>Support page</h4>
-                <h6>Looking for support? </h6>
+                <h6>Looking for support? We got you covered!</h6>
             </div>
         </div>
     );
