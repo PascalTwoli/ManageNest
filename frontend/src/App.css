@@ -432,3 +432,94 @@ Table td .actionbutton {
 
 
 /*  -------------------TenantMoreDetails/profile -------------*/
+
+.profiles_offCanvas {
+  width: 627px !important;
+  background-color: #F5F5F5 !important;
+}
+
+.TenantProfileDetails{
+
+}
+.TenantProfileDetails header {
+  justify-content: space-between;
+  margin-bottom: 30px;
+  align-items: center;
+}
+
+.TenantProfileDetails header span{
+  background-color: #2e90f9;
+  padding: 1px 4px;
+  border-radius: 8px;
+  margin-left: 20px;
+  color: lightgrey;
+}
+
+.TenantProfileDetails .section1{
+  justify-content: space-between;
+  align-items: center;
+  border: solid 1px lightgrey;
+  padding: 6px 10px;
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.TenantProfileDetails .section1 .div1 {
+  align-items: center;
+  gap: 40px;
+}
+
+.TenantProfileDetails .section1 .div1 .image-div{
+  width: 50px;
+  height: 50px;
+  background-color: grey;
+  border-radius: 40px;
+  text-align: center;
+}
+
+.TenantProfileDetails .section1 .div1 .span{
+  font-size: 13px;
+  color: initial;
+}
+.TenantProfileDetails .section1 .div1 span{
+  margin: -4px 0px;
+  font-size: 12px;
+  color: grey;
+}
+
+.edit-div{
+  padding: 4px 6px;
+  border: solid 1px grey;
+  border-radius: 12px;
+  color: grey;
+}
+
+.TenantProfileDetails .section2{
+  border: solid lightgrey 1px;
+  background-color: white;
+  padding: 6px 10px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.TenantProfileDetails .section2 .div2{
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+}
+
+.TenantProfileDetails .section2 .row div{
+  margin-bottom: 20px;
+}
+.TenantProfileDetails .section2 .row h5 {
+  margin: -4px 0px;
+  
+}
+
+.TenantProfileDetails .section2 .row span{
+  color: grey;
+  margin: -4px 0px;
+}
+
