@@ -1,5 +1,3 @@
-import { BsFilePdf } from "react-icons/bs";
-import { useEffect, useState } from "react";
 
 const LeaseAgreement = ({ agreementData }) => {
 	//state to store lease agreement
@@ -78,7 +76,7 @@ const LeaseAgreement = ({ agreementData }) => {
 						of this Agreement.
 					</li>
 					<li className="ol3">
-						Other. <span>[OTHER]</span>
+						Other.
 					</li>
 				</li>
 				<li className="ol1">

@@ -9,7 +9,7 @@
 
 
 
-/*signin.component.css  */
+/*----------------- signin.component.css  ----------------*/
 .container1{
   box-sizing: border-box;
   box-shadow: 0px 0px 4px -2px;
@@ -54,7 +54,6 @@
 .right-bar{
   border-radius: 10px;
   margin-left:10rem;
-  /* margin-left: 7.5%; */
   margin-top: 20px !important;
   margin-bottom: 0px;
   max-width: 29.5rem !important;
@@ -86,7 +85,7 @@
 }
 
 
-/* signup.component.css */
+/*---------------- signup.component.css -----------------*/
 
 .left-bar {
   flex-direction: column;
@@ -124,46 +123,312 @@
   width: 150% !important;
 }
 
-.signup-btn:hover{
-  background-color: white !important;
-  color: #007bff !important;
+
+/* --------- sidebar.component.js ------------ */
+.side-bar{
+  border-right: solid 1px lightgrey !important;
+  row-gap: 70px !important; 
+  /* position: fixed; */
+}
+
+.sidebar-toggle-btn{
+  border-radius: 60% !important;
+  padding: 0px 0px 0px 3px !important;
+  right: -20px;
+  top: 0px !important;
+  height: 25px;
+  width: 25px;
+}
+
+.sidebar-div{
+  display: flex;
+  margin-left: 10px;
+  color: black;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 5px;
+  box-shadow: 0px 4px 3px 3px lightgrey;
+  margin-right: 20px;
+  border-radius: 5px; 
+}
+
+.sidebar-labels{
+  color: grey;
 }
 
 
-/* signup.component.css */
-
-.left-bar {
-  flex-direction: column;
-  line-height: 30px;
-  color: white;
-  border-radius: 10px !important;
-  margin-top: 20px !important;
-  margin-bottom: 0px;
-  max-width: 29.5rem !important;
-  height: 85vh;
-  margin-left: 1.5rem;
+/* -------------- header.component.css ------------ */
+.header-container .logo{
+  height: 80px;
+}
+.header-container{
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0px !important;
+  border-bottom: solid lightgrey 1px;
+  gap: 10rem;
+  padding-right: 10px;
+  position: fixed;
+  width: 100%;
 }
 
-.logo-div {
-  margin-top: 20px;
+.header-container .left{
+  align-items: center;
+  flex: 2;
+}
+.header-container .left h1{
+  font-size: 40px; 
+  font-weight: 700;
 }
 
-.logo{
-  border-radius: 50%;
+.header-container .search-container{
+  align-items: center;
+  flex: 3;
+  border: 1px solid lightgrey;
+  border-radius: 8px;
 }
 
-.left-div-cnter{
-  flex-direction: column;
-  align-items: center !important;
-  justify-content: center !important;
-  padding-top: 6rem;
+.header-container .search-container div{
+  flex: 1;
+  padding-left: 4px;
+}
+.header-container .search-container input{
+  outline: none;
+  border: none;
+  width: 92%;
 }
 
-.class-for-form-signup{
-  padding-left: 120px;
-  padding-top: 5rem;
-  padding-bottom: 130px;
+.header-container .search-container button{
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
 }
-.form-label-signup{
-  width: 150% !important;
+
+.header-container .right{
+  align-items: center;
+  flex: 1;
+  justify-content: space-between;
 }
+
+.header-container .right{
+  
+  font-weight: 900;
+}
+
+.header-container .profile{
+  height: 40px;
+  width: 40px;
+  border-radius: 40px;
+}
+
+/* ---------main content component------- */
+.mainContentContainer{
+padding-top: 80px;
+position: fixed;
+width: 100%;
+}
+
+.main-content-container{
+  margin-left: 30px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+ }
+
+/* ----------- tenant_overview.component.css ---------- */
+.tenants-container{
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+.TenantOverviewHeader{
+  margin-bottom: 20px;
+}
+
+.add-tenant-btn{
+  gap: 5px;
+  align-items: center;
+  color: black !important;
+  margin-bottom: 10px;
+}
+
+.tenant_overview_head1{
+  justify-content: space-between;
+  align-items: center;
+}
+.tenants-container .totals-div{
+  justify-content: space-between;
+  box-shadow: 0px 4px 3px 2px lightgrey;
+  border-radius: 10px;
+}
+
+.tenants-container .totals-div .p1{
+  color: grey;
+}
+
+.tenants-container .totals-div .totals1{
+  align-items: center;
+  /* background-color: #96c6f9; */
+  padding: 24px 60px 12px;
+  border-radius: 10px;
+}
+
+.tenants-container .totals-div .totals1:hover{
+  box-shadow: 0px 4px 3px 2px #96c6f9;
+}
+.tenants-container .totals-div .totals1 .text-primary{
+  background-color: #96c6f9;
+  border-radius: 8px;
+}
+.tenants-container .totals-div .totals1 .text-success{
+  background-color:rgb(201, 231, 201);
+  border-radius: 8px;
+}
+.tenants-container .totals-div .totals1 .text-danger{
+  background-color: rgb(241, 187, 187);
+  border-radius: 8px;
+}
+
+
+
+/* --------tenant_overveiw_table.component.js ----------- */
+
+Table{
+  padding-left: none !important;
+}
+
+Table th{
+  font-weight: 500;
+}
+Table .image{
+  /* height: 40px;
+  width: 40px;
+  border-radius: 30px !important;
+  background-color: green; */
+}
+Table img {
+  width: 45px;
+  height: 45px;
+border-radius: 40px;
+
+}
+
+Table td {
+  color: grey !important;
+  font-size: 13px;
+  align-items: center;
+  border-bottom: 1px solid lightgrey !important;
+  background-color: rgb(250, 250, 250) !important;
+}
+
+Table td .name{
+  color: black;
+  font-size: initial;
+  margin: 0px !important;
+}
+
+Table td .status-div {
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 7px;
+  color: black;
+  font-size: initial;
+  background-color: #2e90f9;
+}
+
+Table td .span2{
+  border-right: 1px solid grey;
+}
+Table td .actionbutton {
+  /* width: fit-content; */
+  border: solid 1px grey;
+  padding: 4px 6px;
+  border-radius: 7px;
+  text-align: end;
+  font-size: initial;
+  justify-content: space-around;
+}
+.th-action{
+  text-align: end;
+}
+
+/*-------- offCanvas ------ */
+
+.offCanvas{
+
+}
+
+/* -------leaseoverview component.js -------- */
+
+.leaseOverview-Container{
+  scroll-behavior: smooth;
+  overflow-y: scroll;
+}
+
+.lease-profiles-container{
+  border:1px solid grey;
+  border-radius: 20px;
+  padding: 10px 15px;
+  margin-bottom: 30px;
+  margin-right: 20px;
+}
+.lease-profiles-div{
+  justify-content: space-between;
+  align-items: center;
+  gap: 50px;
+}
+
+.lease-div{
+  flex: 1;
+ 
+}
+.lease-div-div{
+  justify-content: space-between;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.lease-div-div span{
+  text-decoration: underline;
+  color: grey;
+}
+
+.lease-rent-div {
+  padding: 10px 15px;
+  background-color: #2e90f9;
+  border-radius: 8px;
+  width: 180px;
+}
+.lease-rent-div p{
+  margin: 4px 0px;
+}
+
+.lease-more-info-btn{
+  background: #2e90f9 !important;
+}
+
+.lease-rent-inc {
+  background: white;
+  padding: 3px 5px;
+  text-align: center;
+  border-radius: 8px;
+
+}
+
+
+/* --------lease_agreement.component ------- */
+.leaseAgreement{
+
+}
+.leaseAgreement span {
+  color: #007bff;
+}
+.ol1{
+  list-style-type: upper-roman;
+}
+.ol2{
+  list-style-type: disc;
+}
+.ol3{
+  list-style-type: square;
+}
+
+
+/*  -------------------TenantMoreDetails/profile -------------*/

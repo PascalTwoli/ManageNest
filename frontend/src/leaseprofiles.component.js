@@ -20,8 +20,7 @@ const LeaseProfiles = () => {
 
 	// fetch data from the local storage when the component mounts
 	useEffect(() => {
-		const storedData =
-			JSON.parse(localStorage.getItem("tenantFormData")) || [];
+		const storedData = JSON.parse(localStorage.getItem("tenantFormData")) || [];
 		if (storedData) {
 			setLeaseData(storedData);
 		}

@@ -2,12 +2,17 @@ import { Table } from "react-bootstrap";
 import photos from './photos.jpg'
 import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useState } from "react";
+import TenantMoreDetailsOffcanvas from "./tenant_profiles_offcanvas.component";
 
 const TenantOverviewTable = () => {
 
-
+    //state to control how TenantMoreDetailsOffcanvas visibility;
+    const [showOffcanvas, setShowOffcanvas]  = useState(false);
       // State to store table data (array of rows)
     const [tableData, setTableData] = useState([]);
+
+    const handleShow = () => setShowOffcanvas(true);
+    const handleClose = () => setShowOffcanvas(false);
 
     //fetch data from the localStorage when the component mounts
     useEffect(() => {
@@ -56,8 +61,10 @@ const TenantOverviewTable = () => {
                             <div className="actionbutton d-flex">
                                 <span className="">Delete</span>
                                 <span className="span2"></span>
-                                <span><BsThreeDots /></span>
+                                <span onClick={handleShow}><BsThreeDots /></span>
                             </div>
+                            {/* rendering the offcanvas */}
+                            <TenantMoreDetailsOffcanvas show={showOffcanvas} handleClose={handleClose} />
                         </td>
                     </tr>
                     ))
