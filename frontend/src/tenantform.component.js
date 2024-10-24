@@ -56,7 +56,7 @@ const TenantForm = () => {
 			// fetch existing data from localStorage
 			const storedData =
 				JSON.parse(localStorage.getItem("tenantFormData")) || [];
-
+			
 			const nextID = `${storedData.length + 1}`;
 
 			// add the new formData to the stored data(array)
@@ -406,7 +406,7 @@ const TenantForm = () => {
 						Number of Bathrooms
 					</Form.Label>
 					<Form.Control
-						type="email"
+						type="number"
 						name="bathroomNumber"
 						value={formData.bathroomNumber}
 						onChange={handleInputChange}
