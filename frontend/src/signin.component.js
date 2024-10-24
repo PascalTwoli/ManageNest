@@ -10,11 +10,6 @@ export default function  Signin () {
         navigate('/signup');
     }
 
-    const handlesubmit = async (e) => {
-        e.preventDefault();
-        navigate('/mainbody')
-    }
-
     return(
         <div className="container container1">
             <div className="row d-flex">
@@ -25,7 +20,7 @@ export default function  Signin () {
                     <div className="class-for-form">
                         <h1 className="text-primary sign-in-h1">Sign into ManageNest</h1>
                         <p className="text-default text-1">or use your e-mail account</p>                    
-                        <Form onSubmit={handlesubmit}>
+                        <Form>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
                                 <Form.Label as="p" variant="text-primary" className="form-label text-primary">Email</Form.Label>
                                 <Form.Control type="email" placeholder="Enter email" className="form-input" />
