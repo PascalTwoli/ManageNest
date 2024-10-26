@@ -3,6 +3,7 @@ import photos from "./photos.jpg";
 import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import TenantMoreDetailsOffcanvas from "./tenant_profiles_offcanvas.component";
+import { Alert } from "react-bootstrap";
 
 const TenantOverviewTable = () => {
 	const [activeItem, setActiveItem] = useState();
@@ -26,6 +27,16 @@ const TenantOverviewTable = () => {
 			setTableData(storedData);
 		}
 	}, []);
+
+    const handleDelete = (index) => {
+        const updatedData = tableData.filter((_, i) => i !== index); //removing the selected row by index;
+
+		//update both the localstorage and the state
+		setTableData(updatedData);
+		localStorage.setItem('tenantFormData', JSON.stringify(updatedData));
+
+		alert("You are about to delete a tenant from your records")
+    }
 
 	return (
 		<div>
@@ -66,7 +77,7 @@ const TenantOverviewTable = () => {
 								</td>
 								<td>
 									<div className="actionbutton d-flex">
-										<span className="">Delete</span>
+										<span className="" onClick={() => handleDelete(index)}>Delete</span>
 										<span className="span2"></span>
 										<span onClick={() => handleShow(row)}>
 											<BsThreeDots />
