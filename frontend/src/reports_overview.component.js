@@ -3,8 +3,7 @@ const ReportsOverview = () => {
     return (
         <div>
             <div>
-                <h4>Reports  and statements</h4>
-                <h6>Reports overview</h6>
+                <h4>Payment reports</h4>
             </div>
         </div>
     );

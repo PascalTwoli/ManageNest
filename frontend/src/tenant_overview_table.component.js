@@ -57,16 +57,16 @@ const TenantOverviewTable = () => {
 						tableData.map((row, index) => (
 							<tr key={index}>
 								<td className="d-flex ">
-									<div className="image">
+									{/* <div className="image">
 										<img src={photos} />
-									</div>
+									</div> */}
 									<div>
 										<p className="name">
 											{row.tenantFirstName +
 												" " +
 												row.tenantLastName}
 										</p>
-										<span>{row.tenantNationalId}</span>
+										{/* <span>{row.tenantNationalId}</span> */}
 									</div>
 								</td>
 								<td>{row.tenantBlockName}</td>
