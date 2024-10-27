@@ -22,7 +22,7 @@ const Sidebar = ({ onSelectComponent }) => {
     return (
       <div
         style={{
-          width: expanded ? '250px' : '80px', // Width toggle
+          width: expanded ? '200px' : '80px', // Width toggle
           transition: 'width 0.3s', // Smooth transition
         }}
         className=" text-white vh-100 side-bar position-relative"
@@ -38,11 +38,11 @@ const Sidebar = ({ onSelectComponent }) => {
           {/* Icons and text, toggle text visibility based on the state */}
           <Nav.Item className="d-flex align-items-center my-2 sidebar-div" onClick={() => onSelectComponent('tenant')}>
             < RiLayoutFill  className="me-2 sidebar-labels text-primary" size={24} />
-            {expanded && <span>Tenants overview</span>}
+            {expanded && <span>Tenants</span>}
           </Nav.Item><br/>
           <Nav.Item className="d-flex align-items-center my-2 sidebar-div" onClick={() => onSelectComponent('reports')}>
             <SiReadthedocs className="me-2 sidebar-labels text-primary" size={24} />
-            {expanded && <span>Reports and statements</span>}
+            {expanded && <span>Reports</span>}
           </Nav.Item><br/>
           <Nav.Item className="d-flex align-items-center my-2 sidebar-div" onClick={() => onSelectComponent('lease')}>
             <IoDocumentTextSharp className="me-2 sidebar-labels text-primary" size={24} />

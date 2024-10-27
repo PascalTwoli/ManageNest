@@ -527,3 +527,32 @@ Table td .actionbutton {
   margin: -4px 0px;
 }
 
+
+/* --------- reports component table  -------- */
+
+Table {
+  width: 100% !important;
+}
+
+.thead{
+
+}
+
+.th-center {
+  display: table;
+  /* align-items: normal; */
+  justify-content: space-evenly !important;
+  width: 60% !important;
+}
+
+.td-center {
+  display: table;
+  /* align-items: normal; */
+  justify-content: space-evenly !important;
+  width: 100% !important;
+}
+
+.t-body td{
+  padding: 10px 1px !important;
+}
+

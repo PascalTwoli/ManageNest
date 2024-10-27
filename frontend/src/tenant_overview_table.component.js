@@ -38,6 +38,12 @@ const TenantOverviewTable = () => {
 		alert("You are about to delete a tenant from your records")
     }
 
+  // Update total rent in localStorage whenever tableData changes
+	useEffect(() => {
+			const totalRent = tableData.reduce((sum, row) => sum + (parseFloat(row.rent) || 0), 0);
+			localStorage.setItem('totalRent', totalRent); // Save totalRent to localStorage
+		}, [tableData]); //not working
+
 	return (
 		<div>
 			<Table borderless hover>
