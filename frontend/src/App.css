@@ -152,6 +152,16 @@
   border-radius: 5px; 
 }
 
+.sidebar-div:active{
+  background-color: lightblue !important;
+}
+.sidebar-div:hover{
+  background-color: lightgrey;
+
+}
+.sidebar-div:focus {
+  background: blue;
+}
 .sidebar-labels{
   color: grey;
 }
@@ -245,7 +255,7 @@ width: 100%;
 .add-tenant-btn{
   gap: 5px;
   align-items: center;
-  color: black !important;
+  color: white !important;
   margin-bottom: 10px;
 }
 
@@ -312,26 +322,28 @@ border-radius: 40px;
 
 Table td {
   color: grey !important;
-  font-size: 13px;
+  font-size: 17px;
   align-items: center;
   border-bottom: 1px solid lightgrey !important;
   background-color: rgb(250, 250, 250) !important;
   padding: 10px !important;
   padding-bottom: 0px !important;
+  height: 55px !important;
 }
 
 Table td .name{
   color: black;
-  font-size: initial;
+  font-size: 20px;
+  /* padding-bottom: 4px; */
   /* margin: 0px !important; */
 }
 
-Table td .status-div {
-  width: fit-content;
-  padding: 4px 8px;
-  border-radius: 7px;
-  color: #007bff;
-  font-size: initial;
+Table td  {
+  /* width: fit-content; */
+  /* padding: 4px 8px; */
+  /* border-radius: 7px; */
+  /* color: #007bff; */
+  /* font-size: initial; */
   /* background-color: #2e90f9; */
 }
 
@@ -349,6 +361,19 @@ Table td .actionbutton {
 }
 .th-action{
   text-align: end;
+}
+
+/* payment status button */
+.status-btn{
+  /* background-color: green !important; */
+  padding-bottom: -10px !important;
+  margin: 0px !important;
+}
+.paid-status {
+  color: #007bff !important;
+}
+.due-status {
+  color: rgb(197, 66, 66) !important;
 }
 
 /*-------- offCanvas ------ */
