@@ -9,13 +9,19 @@ const TenantOverviewHeader = () => {
 	const [showOffcanvas, setShowOffcanvas] = useState(false);
 	//total Rent
 	const [totalRent, setTotalRent] = useState(0);
+    const [tenantCount, setTenantCount] = useState(0);
 
 	const handleShow = () => setShowOffcanvas(true);
 	const handleClose = () => setShowOffcanvas(false);
 
 	useEffect(() => {
-		const storedTotalRent = localStorage.getItem("totalRent") || 0;
-		setTotalRent(parseFloat(storedTotalRent));
+        setInterval(() => {
+            const storedTotalRent = localStorage.getItem("totalRent") || 0;
+            setTotalRent(() => parseFloat(storedTotalRent));
+
+            const storedTenantCount = localStorage.getItem('tenantCount') || 0;
+            setTenantCount(() => parseInt(storedTenantCount));
+        }, 1000);
 	}, []);
 
 	return (
@@ -41,7 +47,7 @@ const TenantOverviewHeader = () => {
 						<IoIosPeople size={28} />
 					</div>
 					<div>
-						<span>120</span>
+						<span>{tenantCount}</span>
 						<p className="p1">Total Tenants</p>
 					</div>
 				</div>

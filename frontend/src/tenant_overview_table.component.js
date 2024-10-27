@@ -40,8 +40,11 @@ const TenantOverviewTable = () => {
 
   // Update total rent in localStorage whenever tableData changes
 	useEffect(() => {
-			const totalRent = tableData.reduce((sum, row) => sum + (parseFloat(row.rent) || 0), 0);
+			const totalRent = tableData.reduce((sum, row) => sum + (parseFloat(row.monthlyRent) || 0), 0);
 			localStorage.setItem('totalRent', totalRent); // Save totalRent to localStorage
+
+			const tenantCount = tableData.length;
+			localStorage.setItem('tenantCount', tenantCount);
 		}, [tableData]); //not working
 
 	return (
