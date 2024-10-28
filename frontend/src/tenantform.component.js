@@ -24,6 +24,7 @@ const TenantForm = () => {
 		//lease info
 		securityDeposit: "",
 		monthlyRent: "",
+		paymentStatus: "Paid",
 		prevMonthRent: "",
 		leaseStartDate: "",
 		leaseEndDate: "",
