@@ -65,7 +65,7 @@ const TenantOverviewHeader = () => {
 						<MdOutlinePerson size={28} />
 					</div>
 					<div>
-						<span>342</span>
+						<span>10</span>
 						<p className="p1">Renewal Tenants</p>
 					</div>
 				</div>

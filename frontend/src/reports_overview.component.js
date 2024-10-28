@@ -59,7 +59,7 @@ const ReportsOverview = () => {
                 ):(
                     <tr>
                         <td colSpan="6" className="text-center">
-                            No transactions found.
+                            No payment details found.
                         </td>
                     </tr>
                 )}
