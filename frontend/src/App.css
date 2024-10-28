@@ -581,3 +581,63 @@ Table {
   padding: 10px 1px !important;
 }
 
+
+/* ---------settings.component.js ----------- */
+
+.profile-settings-container {
+
+}
+
+.profile-settings-container .p4{
+  font-size: 16px;
+}
+
+.profile-settings-div {
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid grey;
+  padding: 30px 20px;
+  border-radius: 10px;
+}
+
+.profile-settings-div .col-6 {
+   margin-bottom: 10px;
+}
+.profile-settings-div p{
+  font-size: 18px !important;
+  margin: 0px !important;
+  padding: 0px;
+}
+
+.profile-settings-div span{
+  font-size: 16px;
+  color: grey;
+  border: solid 1px grey;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.notifications-container{
+  
+}
+
+.notifications-container div{
+  margin-bottom: 10px;
+}
+.notifications-container p{
+  padding: 0px;
+  margin: 0px;
+  font-size: 18px;
+}
+
+.notifications-container span {
+  border: solid 1px grey ;
+  padding: 4px;
+  width: 200px !important; 
+  border-radius: 8px;
+  font-size: 16px;
+  color: grey;
+}
+.notifications-container span .toggle-icon{
+  color: #2e90f9;
+}
