@@ -1,6 +1,7 @@
 import { FaToggleOn } from "react-icons/fa";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { MdOutlineToggleOff } from "react-icons/md";
+import ToggleBtn from "./toggle_btn.component";
 
 const ManageSettings = () => {
     
@@ -44,29 +45,30 @@ const ManageSettings = () => {
                     <div className="col-6">
                         <div className="">
                             <p>Reminders for upcoming rent due dates</p>
-                            <span>Enabled <FaToggleOn size={24} className="toggle-icon"/></span>
+                            <span className="d-flex">Enabled <ToggleBtn className="toggle-icon"/></span>
                         </div>
                         <div className="">
                             <p>Allow grace periods when rent is due</p>
-                            <span>Enabled <FaToggleOn size={24}  className="toggle-icon"/></span>
+                            <span className="d-flex">Enabled <ToggleBtn className="toggle-icon"/></span>
                         </div>
                         <div className="">
                             <p>Allow tenants access to their profiles and payment information</p>
-                            <span>Enabled <FaToggleOn size={24} className="toggle-icon"/></span>
+                            <span className="d-flex">Enabled <ToggleBtn className="toggle-icon"/></span>
+                        </div>    
+                        <div className="">
+                            <p>Toggle Display</p>
+                            <span className="d-flex">Dark mode <ToggleBtn className="toggle-icon"/></span>
                         </div>
+                        
                     </div>
                     <div className="col-5">
                         <div>
                             <p>Currency</p>
-                            <span>KSH <RiArrowDropDownLine size={24} className="toggle-icon"/></span>
+                            <span className="d-flex">Ksh <RiArrowDropDownLine size={24} className="toggle-icon"/></span>
                         </div>
                         <div>
                             <p>Language</p>
-                            <span>English <RiArrowDropDownLine size={24} className="toggle-icon"/></span>
-                        </div>
-                        <div>
-                            <p>Toggle Display</p>
-                            <span>Light <MdOutlineToggleOff size={24} className="toggle-icon" />Dark</span>
+                            <span className="d-flex">English <RiArrowDropDownLine size={24} className="toggle-icon"/></span>
                         </div>
                     </div>
                 

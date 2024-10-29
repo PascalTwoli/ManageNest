@@ -25,6 +25,9 @@ export default function Signup() {
     const [error, setError] = useState(null);
     const [success, setSuccess] = useState(false);
 
+	//handling the input validation state
+
+
     //handle form input change
     const handleInputChange = (e) => {
         const {name, value} = e.target;

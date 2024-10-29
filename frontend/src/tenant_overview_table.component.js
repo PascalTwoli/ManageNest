@@ -6,6 +6,17 @@ import TenantMoreDetailsOffcanvas from "./tenant_profiles_offcanvas.component";
 
 import { Alert } from "react-bootstrap";
 
+
+//  generating a character unique code
+const generateUniqueCode = () => {
+	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+	let code = '';
+	for (let i = 0; i < 7; i++) {
+	  code += characters.charAt(Math.floor(Math.random() * characters.length));
+	}
+	return code;
+  };
+
 const TenantOverviewTable = () => {
 	const [activeItem, setActiveItem] = useState();
 
@@ -29,10 +40,17 @@ const TenantOverviewTable = () => {
 		}
 	}, []);
 
-	// Update payment status
-	const handleStatusChange = (index, status) => {
+	// Update payment status and render the unique code
+	const handleStatusChange = (index, status, row) => {
 		const updatedData = [...tableData];
 		updatedData[index].paymentStatus = status;
+
+		if (status == "Paid" && !updatedData[index].uniqueCode) {
+			const uniqueCode = generateUniqueCode();
+			updatedData[index].uniqueCode = uniqueCode;
+			alert(`A unique code  --${uniqueCode}-- has been generated to show a cleared payment by  ${updatedData[index].tenantFirstName +" " + updatedData[index].tenantLastName}`);
+		}
+
 		setTableData(updatedData);
 		localStorage.setItem("tableData", JSON.stringify(updatedData)); // Save updated data to localStorage
 	};
