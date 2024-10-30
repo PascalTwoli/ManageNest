@@ -1,10 +1,25 @@
 import { PiChatTextBold } from "react-icons/pi";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { BiSolidEditAlt } from "react-icons/bi";
+import { useEffect, useState } from "react";
 
 
 const TenantProfileDetails = ({tenantProfileData}) => {
-     
+    //state constrol for showing the unique code
+    const [uniqueCode, setUniqueCode] = useState (null);
+
+    // useEffect (() => {
+
+    // //retrieve all data from the local storage
+    //     const storedData = localStorage.getItem ("tableData") || [];
+
+    //     // Find the specific tenant by ID and get their unique code
+    //     const tenantData = storedData.find((item) => item.id === tenantId)
+    //     if (tenantData) {
+    //         setUniqueCode(tenantData.uniqueCode);
+    //     }
+    // }, [tenantId])
+
 
     return (
         <div className="TenantProfileDetails">
@@ -57,8 +72,8 @@ const TenantProfileDetails = ({tenantProfileData}) => {
                         <span>{tenantProfileData.tenantPhoneNumber}</span>
                     </div>
                     <div className="col-6">
-                        <h6>Occupation</h6>
-                        <span>{tenantProfileData.tenantOccupation}</span>
+                        <h6>Unique Code</h6>
+                        {/* <span>{uniqueCode}</span> */}
                     </div>
                 </div>
             </section>
