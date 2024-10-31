@@ -24,7 +24,7 @@ const TenantForm = () => {
 		//lease info
 		securityDeposit: "",
 		monthlyRent: "",
-		paymentStatus: "Paid",
+		paymentStatus: "---",
 		prevMonthRent: "",
 		leaseStartDate: "",
 		leaseEndDate: "",
@@ -51,7 +51,7 @@ const TenantForm = () => {
 
 	//handle form submit
 	const handleSubmit = async (e) => {
-		// e.preventDefault();
+		e.preventDefault();
 
 		try {
 			// fetch existing data from localStorage
@@ -95,6 +95,8 @@ const TenantForm = () => {
 			// setError(null);
 			alert("Form data submitted!");
 			console.log("Form data saved to local storage:", updatedData);
+
+			// window.location.reload()
 		} catch (error) {
 			console.error("Error submitting the form: ", error);
 			setError("Error submitting the form");
