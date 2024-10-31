@@ -1,6 +1,5 @@
 import { FaToggleOn } from "react-icons/fa";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { MdOutlineToggleOff } from "react-icons/md";
 import ToggleBtn from "./toggle_btn.component";
 
 const ManageSettings = () => {
