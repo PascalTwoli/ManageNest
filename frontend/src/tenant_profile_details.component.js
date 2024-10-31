@@ -1,13 +1,25 @@
 import { PiChatTextBold } from "react-icons/pi";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { BiSolidEditAlt } from "react-icons/bi";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import UniqueCodeDisplay from "./unique_code_display.component";
+import EditTenantOffCanvas from "./edit_tenant_offCanvas.component";
+import { Button } from "react-bootstrap";
 
+//adding tenantId, onTenantUpdate
+const TenantProfileDetails = ({tenantProfileData, onTenantUpdate }) => {
 
-const TenantProfileDetails = ({tenantProfileData}) => {
+    //state control for the offcanvas
+    const [showOffCanvas, setShowOffCanvas] = useState(false);
 
-    
+    const handleEditClick = () => {
+        setShowOffCanvas(true);
+    };
+
+    const handleSave = (updatedTenantData) => {
+
+        onTenantUpdate(updatedTenantData);                                                                    // notify parent component to update table
+      };
 
     return (
         <div className="TenantProfileDetails">
@@ -91,6 +103,21 @@ const TenantProfileDetails = ({tenantProfileData}) => {
                     </div>
                 </div>
             </section>
+
+            <div>
+      {/* edditing tenantData  */}
+      <Button variant="primary" onClick={handleEditClick}>
+        Edit Tenant Details
+      </Button>
+
+      {/* using the EditTenantOffCanvas component */}
+      <EditTenantOffCanvas
+        show={showOffCanvas}
+        onClose={() => setShowOffCanvas(false)}
+        tenantData={tenantProfileData}
+        onSave={handleSave}
+      />
+    </div>
         </div>
     );
 }

@@ -10,8 +10,8 @@ const TenantForm = () => {
 
 	// submitting the form to the server
 	const [formData, setFormData] = useState({
-		tenantId: "",
 		//tenant info
+		tenantId: "",
 		tenantFirstName: "",
 		tenantLastName: "",
 		tenantPhoneNumber: "",
@@ -94,7 +94,7 @@ const TenantForm = () => {
 			// setSuccess(true);
 			// setError(null);
 			alert("Form data submitted!");
-			console.log("Form data saved to local storage:", updatedData);
+		
 
 			// window.location.reload()
 		} catch (error) {

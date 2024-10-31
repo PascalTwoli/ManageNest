@@ -18,15 +18,17 @@ const generateUniqueCode = () => {
 
 const TenantOverviewTable = () => {
   const [activeItem, setActiveItem] = useState();
+  const [activeItemIndex, setActiveItemIndex] = useState();
 
   //state to control how TenantMoreDetailsOffcanvas visibility;
   const [showOffcanvas, setShowOffcanvas] = useState(false);
   // State to store table data (array of rows)
-  const [tableData, setTableData] = useState([]);
+  const [tableData, setTableData] = useState(JSON.parse(localStorage.getItem("tenantFormData")) || []);
 
-  const handleShow = (itemToShow) => {
-    setActiveItem(() => itemToShow);
-    setShowOffcanvas(true);
+  const handleShow = (itemToShow, itemIndex) => {
+		setActiveItem(() => itemToShow);
+		setActiveItemIndex(() => itemIndex)
+		setShowOffcanvas(true);
   };
 
   const handleClose = () => setShowOffcanvas(false);
@@ -40,6 +42,18 @@ const TenantOverviewTable = () => {
 		}
 	}, 1000);
   }, []);
+
+
+  //updatig tenant data__*
+  const handleTenantUpdate = (updatedData) => {
+	console.log("Here now", updatedData, activeItemIndex)
+
+    tableData[activeItemIndex] = {...activeItem, ...updatedData}
+
+	setTableData(() => tableData)
+
+	localStorage.setItem('tenantFormData', JSON.stringify(tableData))
+  };
 
   // update payment status and save the unique code to localStorage
   const handleStatusChange = (index, status) => {
@@ -152,16 +166,18 @@ const TenantOverviewTable = () => {
                       Delete
                     </span>
                     <span className="span2"></span>
-                    <span onClick={() => handleShow(row)}>
+                    <span onClick={() => handleShow(row,index)}>
                       <BsThreeDots />
                     </span>
                   </div>
                   {/* rendering the offcanvas */}
-                  <TenantMoreDetailsOffcanvas
+				  
+                  {activeItem && <TenantMoreDetailsOffcanvas
                     show={showOffcanvas}
                     handleClose={handleClose}
                     tenantProfileData={activeItem}
-                  />
+					onTenantUpdate={handleTenantUpdate}
+                  />}
                 </td>
               </tr>
             ))
