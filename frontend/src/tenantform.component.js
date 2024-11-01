@@ -1,5 +1,6 @@
 import { Form, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
+import { Supabase } from "./helper/supabaseClient"; //import my superbase client
 
 const TenantForm = () => {
 	//function to switch from the signup component to signin component
@@ -10,7 +11,7 @@ const TenantForm = () => {
 
 	// submitting the form to the server
 	const [formData, setFormData] = useState({
-		tenantId: "",
+		// tenantId: "",
 		//tenant info
 		tenantFirstName: "",
 		tenantLastName: "",
@@ -33,7 +34,7 @@ const TenantForm = () => {
 		residenceType: "",
 		bedroomNumber: "",
 		bathroomNumber: "",
-		additionalTerms: "",
+		// additionalTerms: "",
 	});
 
 	// const [loading, setLoading] = useState(false);
@@ -54,18 +55,34 @@ const TenantForm = () => {
 		e.preventDefault();
 
 		try {
-			// fetch existing data from localStorage
-			const storedData =
-				JSON.parse(localStorage.getItem("tenantFormData")) || [];
+			// using supababe *start*
+			//insert data into supabase
+			const {data, error} = await Supabase
+				.from('tenants')
+				.insert([{...formData}]);
+
+			if (error) {
+				console.error("Supabase error:", error.message); // Log full error details
+				setError(error.message); // Display exact error in UI
+				return; // Exit if there's an error
+			}
+
 			
-			const nextID = `${storedData.length + 1}`;
+			// using supababe *end*
 
-			// add the new formData to the stored data(array)
-			const updatedData = [...storedData, { ...formData, tenantId: nextID }];
+			//---------local storage----
+			// // fetch existing data from localStorage
+			// const storedData =
+			// 	JSON.parse(localStorage.getItem("tenantFormData")) || [];
+			
+			// const nextID = `${storedData.length + 1}`;
 
-			//save the updated array back to the localstorage
-			localStorage.setItem("tenantFormData", JSON.stringify(updatedData));
+			// // add the new formData to the stored data(array)
+			// const updatedData = [...storedData, { ...formData, tenantId: nextID }];
 
+			// //save the updated array back to the localstorage
+			// localStorage.setItem("tenantFormData", JSON.stringify(updatedData));
+			//-----ends localstorage -----
 			//clear the form after submission
 			setFormData({
 				tenantFirstName: "",
@@ -88,15 +105,16 @@ const TenantForm = () => {
 				residenceType: "",
 				bedroomNumber: "",
 				bathroomNumber: "",
-				additionalTerms: "",
+				// additionalTerms: "",
 			});
 
-			// setSuccess(true);
-			// setError(null);
+			setSuccess(true);
+			setError(null);
 			alert("Form data submitted!");
-			console.log("Form data saved to local storage:", updatedData);
+			// console.log("Form data saved to local storage:", updatedData);
+			console.log("Form data saved to Supabase:", data);
 
-			// window.location.reload()
+			
 		} catch (error) {
 			console.error("Error submitting the form: ", error);
 			setError("Error submitting the form");
@@ -417,7 +435,7 @@ const TenantForm = () => {
 						className="form-input"
 					/>
 				</Form.Group>
-				<Form.Group className="mb-3" controlId="formBasicTextarea">
+				{/* <Form.Group className="mb-3" controlId="formBasicTextarea">
 					<Form.Label
 						as="p"
 						variant="primary"
@@ -434,7 +452,7 @@ const TenantForm = () => {
 						placeholder="Write here"
 						className="form-input"
 					/>
-				</Form.Group>
+				</Form.Group> */}
 				<Button variant="primary" className="submit-btn" type="submit">
 					Create
 				</Button>{" "}
