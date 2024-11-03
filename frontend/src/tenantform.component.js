@@ -1,6 +1,6 @@
 import { Form, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
-import { Supabase } from "./helper/supabaseClient"; //import my superbase client
+import { supabase } from "./helper/supabaseClient"; //import my superbase client
 
 const TenantForm = () => {
 	//function to switch from the signup component to signin component
@@ -34,7 +34,7 @@ const TenantForm = () => {
 		residenceType: "",
 		bedroomNumber: "",
 		bathroomNumber: "",
-		// additionalTerms: "",
+		additionalTerms: "",
 	});
 
 	// const [loading, setLoading] = useState(false);
@@ -57,7 +57,7 @@ const TenantForm = () => {
 		try {
 			// using supababe *start*
 			//insert data into supabase
-			const {data, error} = await Supabase
+			const {data, error} = await supabase
 				.from('tenants')
 				.insert([{...formData}]);
 
@@ -105,12 +105,12 @@ const TenantForm = () => {
 				residenceType: "",
 				bedroomNumber: "",
 				bathroomNumber: "",
-				// additionalTerms: "",
+				additionalTerms: "",
 			});
 
 			setSuccess(true);
 			setError(null);
-			alert("Form data submitted!");
+			alert("Form data submitted to the database!");
 			// console.log("Form data saved to local storage:", updatedData);
 			console.log("Form data saved to Supabase:", data);
 
@@ -126,7 +126,7 @@ const TenantForm = () => {
 			<Form onSubmit={handleSubmit}>
 				{error && <Alert variant="danger">{error}</Alert>}
 				{success && (
-					<Alert variant="success">Form submitted successfully!</Alert>
+					<Alert variant="success">Tenant data submitted to the database successfully!</Alert>
 				)}
 				{/* tenant information */}
 				<Form.Group className="mb-3" controlId="formBasicName">
@@ -435,7 +435,7 @@ const TenantForm = () => {
 						className="form-input"
 					/>
 				</Form.Group>
-				{/* <Form.Group className="mb-3" controlId="formBasicTextarea">
+				<Form.Group className="mb-3" controlId="formBasicTextarea">
 					<Form.Label
 						as="p"
 						variant="primary"
@@ -452,7 +452,7 @@ const TenantForm = () => {
 						placeholder="Write here"
 						className="form-input"
 					/>
-				</Form.Group> */}
+				</Form.Group>
 				<Button variant="primary" className="submit-btn" type="submit">
 					Create
 				</Button>{" "}
