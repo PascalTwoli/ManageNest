@@ -180,6 +180,8 @@
   padding-right: 10px;
   position: fixed;
   width: 100%;
+  background-color: white;
+  z-index: 1000;
 }
 
 .header-container .left{
@@ -233,7 +235,7 @@
 /* ---------main content component------- */
 .mainContentContainer{
 padding-top: 80px;
-position: fixed;
+/* position: fixed; */
 width: 100%;
 }
 
