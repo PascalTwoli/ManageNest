@@ -138,6 +138,7 @@
   top: 0px !important;
   height: 25px;
   width: 25px;
+
 }
 
 .sidebar-div{
@@ -150,6 +151,7 @@
   box-shadow: 0px 4px 3px 3px lightgrey;
   margin-right: 20px;
   border-radius: 5px; 
+  cursor: pointer;
 }
 
 .sidebar-div:active{
@@ -167,7 +169,7 @@
 }
 
 
-/* -------------- header.component.css ------------ */
+/* ---------- header.component.css ------------ */
 .header-container .logo{
   height: 80px;
 }
