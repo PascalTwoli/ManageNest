@@ -426,6 +426,7 @@ Table td .actionbutton {
   background-color: #2e90f9;
   border-radius: 8px;
   width: 180px;
+  color: white;
 }
 .lease-rent-div p{
   margin: 4px 0px;
@@ -440,7 +441,7 @@ Table td .actionbutton {
   padding: 3px 5px;
   text-align: center;
   border-radius: 8px;
-
+  color: grey;
 }
 
 
@@ -459,6 +460,14 @@ Table td .actionbutton {
 }
 .ol3{
   list-style-type: square;
+}
+.sign-p{
+  /* text-decoration: underline; */
+  /* color: #007bff; */
+}
+.sign-span{
+  text-decoration: line-through;
+  font-family: fantasy;
 }
 
 
@@ -563,22 +572,25 @@ Table {
   width: 100% !important;
 }
 
-.thead{
-
+thead tr{
+  /* border-bottom: none !important; */
 }
 
 .th-center {
-  display: table;
+  /* display: table; */
   /* align-items: normal; */
-  justify-content: space-evenly !important;
-  width: 60% !important;
+  /* justify-content: space-evenly !important; */
+  /* width: 60% !important; */
 }
 
 .td-center {
   display: table;
   /* align-items: normal; */
-  justify-content: space-evenly !important;
+  justify-content: space-between !important;
   width: 100% !important;
+}
+.td-center span {
+  flex: 1;
 }
 
 .t-body td{

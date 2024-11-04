@@ -63,7 +63,7 @@ const LeaseAgreement = ({ agreementData }) => {
 					responsible for the following: (check all that apply)
 					<li className="ol3">
 						Monthly Rent. <span>KES {agreementData.monthlyRent}</span> due
-						on the <span>[30th]</span> of each month.
+						on the <span>30th</span> of each month.
 					</li>
 					<li className="ol3">
 						Security Deposit.{" "}
@@ -88,10 +88,8 @@ const LeaseAgreement = ({ agreementData }) => {
 					ADDITIONAL TERMS. <span>{agreementData.additionalTerms}</span>
 				</li>
 				<p>
-					Landlord’s Signature: __________________ Tenant’s Signature:
-					__________________{" "}
+					Landlord’s Signature:<p className="sign-p"> <span className="sign-span">PasTwoli</span> </p>Tenant’s Signature:<p className="sign-p"><span className="sign-span">MarkLar</span></p>
 				</p>
-				<p>Print Name: __________________ Print Name: __________________</p>
 			</ol>
 		</div>
 	);

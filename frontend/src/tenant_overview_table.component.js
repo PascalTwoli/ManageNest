@@ -8,19 +8,10 @@ import {
 	fetchTenants,
 	deleteTenant,
 	updateTenant,
+	generateUniqueCode,
+	transactionRef,
 } from "./services/tenantService";
 
-import { Alert } from "react-bootstrap";
-
-//  generating a character unique code
-const generateUniqueCode = () => {
-	const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-	let code = "";
-	for (let i = 0; i < 7; i++) {
-		code += characters.charAt(Math.floor(Math.random() * characters.length));
-	}
-	return code;
-};
 
 const TenantOverviewTable = () => {
 	const [activeItem, setActiveItem] = useState();
@@ -37,17 +28,13 @@ const TenantOverviewTable = () => {
 
 	//fetch tanant data from supabase
 	useEffect(() => {
-		setInterval(() => {
 			const loadTenants = async () => {
 				setLoading(true);
 				const data = await fetchTenants();
 				setTenants(data || []); // set tenants to data or an empty array if fetch fails
 				setLoading(false);
 			};
-	
 			loadTenants();
-		}, 1000
-		);
 	}, []);
 
 	// State to store table data (array of rows)
@@ -60,16 +47,6 @@ const TenantOverviewTable = () => {
 	};
 
 	const handleClose = () => setShowOffcanvas(false);
-
-	//fetch data from the localStorage when the component mounts
-	//   useEffect(() => {
-	// 	setInterval( () => {
-	// 		const storedData = JSON.parse(localStorage.getItem("tenantFormData")) || []; //parsing the json string back to an object
-	// 		if (storedData) {
-	// 			settenants(storedData);
-	// 		}
-	// 	}, 1000);
-	//   }, []);
 
 	//updatig tenant data__*
 	const handleTenantUpdate = async (updatedData) => {
@@ -87,8 +64,6 @@ const TenantOverviewTable = () => {
 			console.log("Error occured while updating the tenant");
 			alert("Error occured while updating the tenant");
 		}
-
-		// localStorage.setItem('tenantFormData', JSON.stringify(tenants))
 	};
 
 	// update payment status and save the unique code to localStorage
@@ -100,6 +75,8 @@ const TenantOverviewTable = () => {
 		if (status === "Paid" && !updatedData[index].uniqueCode) {
 			const uniqueCode = generateUniqueCode();
 			updatedData[index].uniqueCode = uniqueCode;
+			const transactionCode = transactionRef();
+			updatedData[index].transactionCode = transactionCode;
 			alert(
 				`A unique code --${uniqueCode}-- has been generated to show a cleared payment by ${updatedData[index].tenantFirstName} ${updatedData[index].tenantLastName}`
 			);
@@ -117,6 +94,9 @@ const TenantOverviewTable = () => {
 				paymentStatus: tenant.paymentStatus,
 				uniqueCode: tenant.uniqueCode,
 			});
+
+
+			
 			// console.log("saved status: ", tenant)
 			// console.log("Tenant data updated successfully in Supabase");
 			alert("Tenant data updated successfully in Supabase");
