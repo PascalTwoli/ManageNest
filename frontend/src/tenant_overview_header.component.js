@@ -43,30 +43,30 @@ const TenantOverviewHeader = () => {
 			{/* container for the totals */}
 			<div className="d-flex totals-div">
 				<div className="d-flex totals1">
-					<div className="text-primary">
+					{/* <div className="text-primary">
 						<IoIosPeople size={28} />
-					</div>
+					</div> */}
 					<div>
-						<span>{tenantCount}</span>
 						<p className="p1">Total Tenants</p>
+						<span>{tenantCount}</span>
 					</div>
 				</div>
 				<div className="d-flex totals1">
-					<div className="text-success">
+					{/* <div className="text-success">
 						<MdAttachMoney size={28} />
-					</div>
+					</div> */}
 					<div>
-						<span>Ksh {totalRent}</span>
 						<p className="p1">Total Amount collected</p>
+						<span>Ksh {totalRent}</span>
 					</div>
 				</div>
 				<div className="d-flex totals1">
-					<div className="text-danger">
+					{/* <div className="text-danger">
 						<MdOutlinePerson size={28} />
-					</div>
+					</div> */}
 					<div>
-						<span>10</span>
 						<p className="p1">Renewal Tenants</p>
+						<span>10</span>
 					</div>
 				</div>
 			</div>
