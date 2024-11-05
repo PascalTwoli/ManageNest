@@ -11,7 +11,7 @@ const ManageSettings = () => {
             </div>
 
             <div className="profile-settings-container">
-                <h6>Profile setup</h6>
+                <h6>Account Settings</h6>
                 <p className="p4">Update your profile information incase of any changes</p>
                 <div className="d-flex profile-settings-div">
                     <div>profile image</div>

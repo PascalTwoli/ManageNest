@@ -1,5 +1,6 @@
 import { BiSolidEdit } from "react-icons/bi";
 import Button from "react-bootstrap/Button";
+import { Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import LeaseModal from "./lease_modal.component";
 import { fetchTenants } from "./services/tenantService";
@@ -35,6 +36,12 @@ const LeaseProfiles = () => {
 		// 	setLeaseData(storedData);
 		// }
 	}, []);
+
+	if (loading) return (
+		<Spinner animation="border" role="status">
+			<span className="visually-hidden">Loading...</span>
+	  </Spinner>
+	);
 
 	return (
 		<div>

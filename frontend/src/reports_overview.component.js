@@ -1,4 +1,4 @@
-import { Table  } from "react-bootstrap";
+import { Table, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { fetchTenants } from "./services/tenantService";
 
@@ -32,7 +32,12 @@ const ReportsOverview = () => {
     }
     
 
-    if (loading) return <p>Loading reports...</p>
+    if (loading) return (
+		<Spinner animation="border" role="status">
+			<span className="visually-hidden">Loading...</span>
+	  </Spinner>
+	);
+    
     return (
         <div>
             <div>
