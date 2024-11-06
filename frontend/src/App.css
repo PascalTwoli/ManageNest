@@ -704,3 +704,47 @@ color: #007bff;
   left: calc(20px);
 }
 
+/* -------support page ------*/
+
+/* c-----contact page------ */
+.contactus-div {
+
+}
+
+.contactus-div p{
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+.contactus-div span {
+  color: grey;
+  font-size: smaller;
+}
+
+.person1-div{
+  flex: 2;
+}
+.person1-div img {
+  height: 25rem;
+
+}
+
+.s-div1{
+  flex: 5;
+  margin-right: 6rem;
+}
+
+/* ---------footer -------- */
+
+.footer {
+  position: fixed;
+  text-align: center;
+  font-weight: 200;
+  font-size: smaller;
+  bottom: 0px;
+  right: 40%;
+}
+.footer img {
+  height: 20px;
+}
+

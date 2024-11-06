@@ -1,18 +1,47 @@
 import { Button, ButtonGroup, Dropdown, Form } from "react-bootstrap";
 import logo from './logo.jpeg';
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 import Signup from "./signup.component";
+import { handleSigninToManageNest } from "./services/adminServices";
+import { useState } from "react";
+
 
 export default function  Signin () {
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    })
 
     const navigate = useNavigate();
     const handleSignupClick = () => {
         navigate('/signup');
     }
 
+    const handleInputChange = (e) => {
+        const {name, value} = e.target;
+        setFormData((preveData) => ({
+            ...preveData,
+            [name]: value
+        }))
+    }
+
     const handlesubmit = async (e) => {
         e.preventDefault();
-        navigate('/mainbody')
+        
+        const { email, password } = formData;
+    
+        try {
+          await handleSigninToManageNest(email, password);
+          alert('Sign-in successful!');
+        //   return redirect ("/mainbody")
+        navigate("/mainbody")
+        } catch (error) {
+          alert(`Sign-in failed: ${error.message}`);
+        //   return redirect('./signin')
+          
+        }
+    
+        
     }
 
     return(
@@ -27,13 +56,36 @@ export default function  Signin () {
                         <p className="text-default text-1">or use your e-mail account</p>                    
                         <Form onSubmit={handlesubmit}>
                             <Form.Group className="mb-3" controlId="formBasicEmail">
-                                <Form.Label as="p" variant="text-primary" className="form-label text-primary">Email</Form.Label>
-                                <Form.Control type="email" placeholder="Enter email" className="form-input" />
+                                <Form.Label 
+                                    as="p" 
+                                    variant="text-primary" 
+                                    className="form-label text-primary"
+                                    >Email              
+                                </Form.Label>
+                                <Form.Control 
+                                    type="email" 
+                                    name="email"
+                                    placeholder="Enter email" 
+                                    className="form-input" 
+                                    value={formData.email}
+                                    onChange={handleInputChange}/>
                             </Form.Group>
 
                             <Form.Group className="mb-3" controlId="formBasicPassword">
-                                <Form.Label as="p" variant="primary" className="form-label text-primary">Password</Form.Label>
-                                <Form.Control type="password" placeholder="Password" className="form-input" />
+                                <Form.Label 
+                                    as="p" 
+                                    variant="primary" 
+                                    className="form-label text-primary"
+                                    >Password
+                                </Form.Label>
+                                <Form.Control 
+                                    type="password" 
+                                    name="password"
+                                    placeholder="Password" 
+                                    className="form-input"  
+                                    value={formData.password}
+                                    onChange={handleInputChange}
+                                />
                             </Form.Group>
                             <Button variant="primary" className="submit-btn" type="submit">
                                 Sign in
