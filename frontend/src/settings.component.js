@@ -1,8 +1,27 @@
-import { FaToggleOn } from "react-icons/fa";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import ToggleBtn from "./toggle_btn.component";
+import { useState } from "react";
 
 const ManageSettings = () => {
+    const [notifications, setNotifications] = useState({
+        notification1: false,
+        notification2: false,
+        notification3: false,
+        notification4: false,
+        notification5: false,
+        notification6: false,
+    })
+
+    // const handleToggleChange = (isToggled) => {
+    //     setNotificationStatus (isToggled ? 'enabled' : 'disabled');
+    // }
+
+    const handleToggle = (notificationKey) => {
+        setNotifications((prevNotifications) => ({
+          ...prevNotifications,
+          [notificationKey]: !prevNotifications[notificationKey],
+        }));
+      };
     
     return (
         <div>
@@ -44,19 +63,39 @@ const ManageSettings = () => {
                     <div className="col-6">
                         <div className="">
                             <p>Reminders for upcoming rent due dates</p>
-                            <span className="d-flex">Enabled <ToggleBtn className="toggle-icon"/></span>
+                            <span className="d-flex"> {notifications.notification1 ? "Enabled" : "Disabled"}
+                            <ToggleBtn
+                                isToggled={notifications.notification1}
+                                onToggle={() => handleToggle("notification1")}
+                                />
+                            </span>
                         </div>
                         <div className="">
                             <p>Allow grace periods when rent is due</p>
-                            <span className="d-flex">Enabled <ToggleBtn className="toggle-icon"/></span>
+                            <span className="d-flex"> {notifications.notification2 ? "Enabled" : "Disabled"}
+                            <ToggleBtn
+                                isToggled={notifications.notification2}
+                                onToggle={() => handleToggle("notification2")}
+                                />
+                            </span>
                         </div>
                         <div className="">
                             <p>Allow tenants access to their profiles and payment information</p>
-                            <span className="d-flex">Enabled <ToggleBtn className="toggle-icon"/></span>
+                            <span className="d-flex"> {notifications.notification3 ? "Enabled" : "Disabled"}
+                            <ToggleBtn
+                            isToggled={notifications.notification3}
+                            onToggle={() => handleToggle("notification3")}
+                            />
+                            </span>
                         </div>    
                         <div className="">
                             <p>Toggle Display</p>
-                            <span className="d-flex">Dark mode <ToggleBtn className="toggle-icon"/></span>
+                            <span className="d-flex"> {notifications.notification4 ? "Enabled" : "Disabled"}
+                                <ToggleBtn
+                                    isToggled={notifications.notification4}
+                                    onToggle={() => handleToggle("notification4")}
+                                />
+                            </span>
                         </div>
                         
                     </div>
