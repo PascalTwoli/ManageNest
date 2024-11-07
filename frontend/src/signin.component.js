@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Dropdown, Form } from "react-bootstrap";
+import { Button, ButtonGroup, Alert, Form } from "react-bootstrap";
 import logo from './logo.jpeg';
 import { redirect, useNavigate } from "react-router-dom";
 import Signup from "./signup.component";
@@ -6,7 +6,9 @@ import { handleSigninToManageNest } from "./services/adminServices";
 import { useState } from "react";
 
 
+
 export default function  Signin () {
+    const [error, setError] = useState ()
     const [formData, setFormData] = useState({
         email: '',
         password: '',
@@ -32,7 +34,10 @@ export default function  Signin () {
     
         try {
           await handleSigninToManageNest(email, password);
-          alert('Sign-in successful!');
+          if (error) {
+            setError (error)
+          }
+        //   alert('Sign-in successful!');
         //   return redirect ("/mainbody")
         navigate("/mainbody")
         } catch (error) {
@@ -46,6 +51,7 @@ export default function  Signin () {
 
     return(
         <div className="container container1">
+            {error && <Alert variant="danger">{error.message}</Alert>}
             <div className="row d-flex">
                 <div className="col-md-6">
                     <div>
