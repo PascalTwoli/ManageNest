@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "../helper/supabaseClient"
+import { createClient } from "@supabase/supabase-js";
 
 // const [error, setError] = useState(null);
 
@@ -63,5 +64,33 @@ export const deleteTenant = async (tenantId) => {
 		return null;
 	}
 };
+
+//  generating a character unique code
+export const generateUniqueCode = async () => {
+	const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+	let code = "";
+	for (let i = 0; i < 7; i++) {
+		code += characters.charAt(Math.floor(Math.random() * characters.length));
+	}
+	return code;
+};
+
+
+export const transactionRef = async () => {
+    const idStrLen = 10;
+    let idStr = (Math.floor((Math.random() * 25)) + 10).toString(36).toUpperCase();
+    idStr += (new Date()).getTime().toString(36).toUpperCase();
+
+    if (!idStr.startsWith("S")) {
+        idStr = "S" + idStr;
+    }
+
+    while (idStr.length < idStrLen) {
+        idStr += (Math.floor((Math.random() * 35))).toString(36).toUpperCase();
+    }
+
+    idStr = idStr.slice(0, idStrLen);
+    return idStr;
+}
 
 

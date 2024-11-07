@@ -1,7 +1,9 @@
 import { BiSolidEdit } from "react-icons/bi";
 import Button from "react-bootstrap/Button";
+import { Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import LeaseModal from "./lease_modal.component";
+import { fetchTenants } from "./services/tenantService";
 
 const LeaseProfiles = () => {
 	const [activeItem, setActiveItem] = useState();
@@ -11,6 +13,7 @@ const LeaseProfiles = () => {
 
 	//state to store lease
 	const [leaseData, setLeaseData] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	const handleShow = (itemToShow) => {
 		setActiveItem(() => itemToShow);
@@ -20,11 +23,25 @@ const LeaseProfiles = () => {
 
 	// fetch data from the local storage when the component mounts
 	useEffect(() => {
-		const storedData = JSON.parse(localStorage.getItem("tenantFormData")) || [];
-		if (storedData) {
-			setLeaseData(storedData);
-		}
+		const loadProfiles = async () => {
+			setLoading(true);
+			const data = await fetchTenants();
+			setLeaseData(data || []); //set leaseData to data or an empty array if fetch fails
+			setLoading(false);
+		};
+
+		loadProfiles ();
+		// const storedData = JSON.parse(localStorage.getItem("tenantFormData")) || [];
+		// if (storedData) {
+		// 	setLeaseData(storedData);
+		// }
 	}, []);
+
+	if (loading) return (
+		<Spinner animation="border" role="status">
+			<span className="visually-hidden">Loading...</span>
+	  </Spinner>
+	);
 
 	return (
 		<div>

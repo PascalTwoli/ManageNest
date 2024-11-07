@@ -2,6 +2,7 @@ import { Button, Form, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import logo from "./logo.jpeg";
+import { handleSignupToManageNest } from "./services/adminServices";
 
 
 export default function Signup() {
@@ -18,7 +19,7 @@ export default function Signup() {
         username: '',
         email: '',
         password: '',
-        remember: ''
+		phone: '',
     });
 
     // const [loading, setLoading] = useState(false);
@@ -40,8 +41,11 @@ export default function Signup() {
     //handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault(); //prevent default form behavior;
+		const { username, email, phone, password } = formData;
 
         try {
+			await handleSignupToManageNest(username, email, phone, password);
+			alert('Signup successful!');  
             // const response = await fetch ('https://example.com/api/form-submit', {
             //     method: 'POST',
             //     headers: {
@@ -59,15 +63,16 @@ export default function Signup() {
             //     setError('Failed to submit the form');
             // }
 
-            localStorage.setItem('formData', JSON.stringify(formData));
+            // localStorage.setItem('formData', JSON.stringify(formData));
 
-            setSuccess(true);
-            setError(null);
-            console.log('Form data saved to local storage:', formData);
+            // setSuccess(true);
+            // setError(null);
+            // console.log('Form data saved to local storage:', formData);
             navigate("/mainbody")
         } catch (error) {
-            console.error('Error submitting the form: ', error);
-            setError('Error submitting the form');
+            // console.error('Error submitting the form: ', error);
+            // setError('Error submitting the form');
+			alert(`Signup failed: ${error.message}`);
         } 
         // finally {
         //     setLoading(false);
@@ -113,15 +118,33 @@ export default function Signup() {
 									as="p"
 									variant="text-primary"
 									className="form-label text-primary">
-									Username
+									Name
 								</Form.Label>
 								<Form.Control
 									type="text"
                                     name="username"
                                     value={formData.username}
                                     onChange={handleInputChange}
-									placeholder="Enter username"
+									placeholder="Enter your name"
 									className="form-input"
+									required
+								/>
+							</Form.Group>
+							<Form.Group className="mb-3" controlId="formBasicphoneNumber">
+								<Form.Label
+									as="p"
+									variant="text-primary"
+									className="form-label text-primary">
+									Phone number
+								</Form.Label>
+								<Form.Control
+									type="text"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleInputChange}
+									placeholder="Enter phone number"
+									className="form-input"
+									required
 								/>
 							</Form.Group>
 							<Form.Group className="mb-3" controlId="formBasicEmail">
@@ -138,6 +161,7 @@ export default function Signup() {
                                     onChange={handleInputChange}
 									placeholder="Enter email"
 									className="form-input"
+									required
 								/>
 							</Form.Group>
 							<Form.Group className="mb-3" controlId="formBasicPassword">
@@ -154,6 +178,7 @@ export default function Signup() {
                                     onChange={handleInputChange}
 									placeholder="Password"
 									className="form-input"
+									required
 								/>
 							</Form.Group>
 							<Form.Group className="mb-3" controlId="formBasicCheckbox">

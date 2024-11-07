@@ -1,16 +1,25 @@
-import { Table  } from "react-bootstrap";
+import { Table, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import { fetchTenants } from "./services/tenantService";
 
 const ReportsOverview = () => {
 
-    // const [activeItem, setActiveItem] = useState();
+    const [loading, setLoading] = useState();
 
     //State to store table data (array of rows)
-    const [tableData, setTableData] = useState ([]);
+    const [tenantData, setTenantData] = useState ([]);
 
     useEffect (() => {
-        const storedData = JSON.parse(localStorage.getItem('tenantFormData')) || [];
-        if (storedData) {setTableData(storedData);}
+        const loadReports = async () => {
+            setLoading (true)
+            const data = await fetchTenants();
+            setTenantData(data || []);
+            setLoading(false)
+        }
+
+        loadReports();
+        // const storedData = JSON.parse(localStorage.getItem('tenantFormData')) || [];
+        // if (storedData) {setTenantData(storedData);}
     },[])
 
     function getDate () {
@@ -21,6 +30,13 @@ const ReportsOverview = () => {
         return `${date}/${month}/${year}`;
 
     }
+    
+
+    if (loading) return (
+		<Spinner animation="border" role="status">
+			<span className="visually-hidden">Loading...</span>
+	  </Spinner>
+	);
     
     return (
         <div>
@@ -40,17 +56,17 @@ const ReportsOverview = () => {
                     </tr>
                 </thead>
                 <tbody className="t-body">
-                {tableData.length > 0 ? (
-                    tableData.map((row, index) => (                        
+                {tenantData.length > 0 ? (
+                    tenantData.map((row, index) => (                        
                         <tr key={index}>                                                        
                             <td>{row.tenantFirstName +
                                     " " +
                                     row.tenantLastName}</td>
-                            <td className="td-center"> 
-                                <td>{getDate()}</td>
-                                <td> Cash</td>
-                                <td>sqwjj43jds</td>
-                                <td>{row.monthlyRent}</td>
+                            <td className="td-center d-flex"> 
+                                <span>{getDate()}</span>
+                                <span> Cash</span>
+                                <span>sqwjj43jds</span>
+                                <span>{row.monthlyRent}</span>
                             </td>   
                             <td> 48000</td>
                             <td> Delete</td>
@@ -68,5 +84,6 @@ const ReportsOverview = () => {
         </div>
     );
 }
+
 
 export default ReportsOverview;

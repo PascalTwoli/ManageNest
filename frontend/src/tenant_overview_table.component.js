@@ -1,4 +1,4 @@
-import { Table, Dropdown, DropdownButton } from "react-bootstrap";
+import { Table, Dropdown, Spinner } from "react-bootstrap";
 import photos from "./photos.jpg";
 import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useState } from "react";
@@ -37,7 +37,6 @@ const TenantOverviewTable = () => {
 
 	//fetch tanant data from supabase
 	useEffect(() => {
-		setInterval(() => {
 			const loadTenants = async () => {
 				setLoading(true);
 				const data = await fetchTenants();
@@ -46,12 +45,7 @@ const TenantOverviewTable = () => {
 			};
 	
 			loadTenants();
-		}, 1000
-		);
 	}, []);
-
-	// State to store table data (array of rows)
-	//  const [tenants, setTenants] = useState(JSON.parse(localStorage.getItem("tenantFormData")) || []);
 
 	const handleShow = (itemToShow, itemIndex) => {
 		setActiveItem(() => itemToShow);
@@ -61,19 +55,8 @@ const TenantOverviewTable = () => {
 
 	const handleClose = () => setShowOffcanvas(false);
 
-	//fetch data from the localStorage when the component mounts
-	//   useEffect(() => {
-	// 	setInterval( () => {
-	// 		const storedData = JSON.parse(localStorage.getItem("tenantFormData")) || []; //parsing the json string back to an object
-	// 		if (storedData) {
-	// 			settenants(storedData);
-	// 		}
-	// 	}, 1000);
-	//   }, []);
-
 	//updatig tenant data__*
 	const handleTenantUpdate = async (updatedData) => {
-		// console.log("Here now", updatedData, activeItemIndex)
 
 		tenants[activeItemIndex] = { ...activeItem, ...updatedData };
 
@@ -100,6 +83,7 @@ const TenantOverviewTable = () => {
 		if (status === "Paid" && !updatedData[index].uniqueCode) {
 			const uniqueCode = generateUniqueCode();
 			updatedData[index].uniqueCode = uniqueCode;
+			console.log("this is my unique code: ", uniqueCode)
 			alert(
 				`A unique code --${uniqueCode}-- has been generated to show a cleared payment by ${updatedData[index].tenantFirstName} ${updatedData[index].tenantLastName}`
 			);
@@ -117,15 +101,10 @@ const TenantOverviewTable = () => {
 				paymentStatus: tenant.paymentStatus,
 				uniqueCode: tenant.uniqueCode,
 			});
-			// console.log("saved status: ", tenant)
-			// console.log("Tenant data updated successfully in Supabase");
 			alert("Tenant data updated successfully in Supabase");
 		} catch (error) {
-			// console.error("Error updating tenant data:", error.message);
 			alert("Error updating tenant data:", error.message);
 		}
-		// await updateTenant(updatedData);
-		// localStorage.setItem("tenantFormData", JSON.stringify(updatedData)); // ssave updated data to localStorage
 	};
 
 	const handleDelete = async (tenantId) => {
@@ -140,10 +119,12 @@ const TenantOverviewTable = () => {
 					prevTenants.filter((tenant) => tenant.tenantId !== tenantId)
 				);
 				alert("Tenant deleted successfully");
-			} else {
+			}
+			else {
 				alert("Failed to delete tenant");
 			}
 		}
+
 	};
 
 	// update total rent in localStorage whenever tenants changes
@@ -159,7 +140,11 @@ const TenantOverviewTable = () => {
 	}, [tenants]); //not working
 
 	// render loading, error, or table data
-	if (loading) return <p>Loading...</p>;
+	if (loading) return (
+		<Spinner animation="border" role="status">
+			<span className="visually-hidden">Loading...</span>
+	  </Spinner>
+	);
 	if (error) return <p>{error}</p>;
 
 	return (
@@ -227,17 +212,6 @@ const TenantOverviewTable = () => {
 											</Dropdown.Item>
 										</Dropdown.Menu>
 									</Dropdown>
-									{/* <DropdownButton
-						as="a"
-						size="sm"
-						className="status-btn"
-						title={row.paymentStatus}
-						variant={row.paymentStatus === 'Paid' ? 'default': 'green'}
-						onSelect={(status) => handleStatusChange(index, status)}
-					>
-						<Dropdown.Item eventKey="Paid" className="paid-status">Paid</Dropdown.Item>
-						<Dropdown.Item eventKey="Due" className="due-status">Due</Dropdown.Item>
-					</DropdownButton> */}
 								</td>
 								<td>
 									<div className="actionbutton d-flex">

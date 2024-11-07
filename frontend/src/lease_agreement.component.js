@@ -1,6 +1,51 @@
+import { useEffect, useState } from "react";
+import { supabase } from "./helper/supabaseClient";
+import { Spinner } from "react-bootstrap";
 
 const LeaseAgreement = ({ agreementData }) => {
-	//state to store lease agreement
+	const [loading, setLoading]= useState(false);
+	const [userData, setUserData] = useState (null);
+	const [error, setError] = useState(null);
+	
+	
+	useEffect(() => {
+        const loadAdmin = async ( ) => {
+            try {
+                setLoading(true);
+                //get the user from the session
+                const {data: {user}} = await supabase.auth.getUser();
+    
+                if (error) {
+                    throw error.message; // handle error fetching user
+                }
+
+                const {
+                    username, phone, email
+                } = user.user_metadata
+
+                setUserData(() => ({username, phone, email}))
+    
+    
+            } catch (err) {
+                console.error('Error fetching user info:', err.message);
+                setError('Error fetching user information.');
+            }
+   
+        }
+        loadAdmin();
+      }, []);
+
+	  if (error) {
+        return <div>{error}</div>;
+    }
+
+    if (!userData) {
+        return <div>
+            <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
+        </div>;
+    }
 
 	return (
 		<div className="leaseAgreement">
@@ -9,8 +54,8 @@ const LeaseAgreement = ({ agreementData }) => {
 					THE PARTIES. This Lease Agreement (“Agreement”) made this{" "}
 					<span>{agreementData.tenantMoveInDate}</span>
 					is between: <br />
-					Landlord: <span>[LANDLORD'S NAME]</span> with a mailing address
-					of <span>[ADDRESS]</span>
+					Landlord: <span>{userData.username}</span> with a mailing address
+					of <span>{userData.email}</span>
 					("Landlord"), and <br />
 					Tenant(s):{" "}
 					<span>
@@ -63,7 +108,7 @@ const LeaseAgreement = ({ agreementData }) => {
 					responsible for the following: (check all that apply)
 					<li className="ol3">
 						Monthly Rent. <span>KES {agreementData.monthlyRent}</span> due
-						on the <span>[30th]</span> of each month.
+						on the <span>30th</span> of each month.
 					</li>
 					<li className="ol3">
 						Security Deposit.{" "}
@@ -88,10 +133,8 @@ const LeaseAgreement = ({ agreementData }) => {
 					ADDITIONAL TERMS. <span>{agreementData.additionalTerms}</span>
 				</li>
 				<p>
-					Landlord’s Signature: __________________ Tenant’s Signature:
-					__________________{" "}
+					Landlord’s Signature:<p className="sign-p"> <span className="sign-span">PasTwoli</span> </p>Tenant’s Signature:<p className="sign-p"><span className="sign-span">MarkLar</span></p>
 				</p>
-				<p>Print Name: __________________ Print Name: __________________</p>
 			</ol>
 		</div>
 	);

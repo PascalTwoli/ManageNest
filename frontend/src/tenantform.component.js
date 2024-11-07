@@ -66,24 +66,6 @@ const TenantForm = () => {
 				setError(error.message); // Display exact error in UI
 				return; // Exit if there's an error
 			}
-
-			
-			// using supababe *end*
-
-			//---------local storage----
-			// // fetch existing data from localStorage
-			// const storedData =
-			// 	JSON.parse(localStorage.getItem("tenantFormData")) || [];
-			
-			// const nextID = `${storedData.length + 1}`;
-
-			// // add the new formData to the stored data(array)
-			// const updatedData = [...storedData, { ...formData, tenantId: nextID }];
-
-			// //save the updated array back to the localstorage
-			// localStorage.setItem("tenantFormData", JSON.stringify(updatedData));
-			//-----ends localstorage -----
-			//clear the form after submission
 			setFormData({
 				tenantFirstName: "",
 				tenantLastName: "",
