@@ -1,6 +1,10 @@
 import { RiArrowDropDownLine } from "react-icons/ri";
 import ToggleBtn from "./toggle_btn.component";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { fetchAdmin } from "./services/adminServices";
+import { Spinner } from "react-bootstrap";
+import { supabase } from "./helper/supabaseClient";
+
 
 const ManageSettings = () => {
     const [notifications, setNotifications] = useState({
@@ -12,6 +16,11 @@ const ManageSettings = () => {
         notification6: false,
     })
 
+const [userData, setUserData] = useState (null);
+const [loading, setLoading] = useState(true);
+const [error, setError] = useState(null);
+    
+
     // const handleToggleChange = (isToggled) => {
     //     setNotificationStatus (isToggled ? 'enabled' : 'disabled');
     // }
@@ -22,6 +31,54 @@ const ManageSettings = () => {
           [notificationKey]: !prevNotifications[notificationKey],
         }));
       };
+
+      //fetch user inforamtion from the database
+      useEffect(() => {
+        const loadAdmin = async ( ) => {
+            try {
+                setLoading(true);
+                //get the user from the session
+                const {data: {user}} = await supabase.auth.getUser();
+    
+                if (error) {
+                    throw error.message; // handle error fetching user
+                }
+
+                const {
+                    username, phone, email
+                } = user.user_metadata
+
+                setUserData(() => ({username, phone, email}))
+    
+    
+            } catch (err) {
+                console.error('Error fetching user info:', err.message);
+                setError('Error fetching user information.');
+            }
+   
+        }
+        loadAdmin();
+      }, []);
+
+    //   if (loading) return (
+    //     <Spinner animation="border" role="status">
+    //         <span className="visually-hidden">Loading...</span>
+    //     </Spinner>
+    //   )
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+
+    if (!userData) {
+        return <div>
+            <Spinner animation="border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </Spinner>
+        </div>;
+    }
+
+      
     
     return (
         <div>
@@ -37,20 +94,20 @@ const ManageSettings = () => {
                     <div className="row"> 
                         <div className="col-6" >
                             <p>Name</p>
-                            <span>Pascal Twoli</span>
+                            <span>{userData.username}</span>
                         </div>
                         <div className="col-6">
                             <p>Phone number</p>
-                            <span>07088394302</span>
+                            <span>{userData.phone}</span>
                         </div>
                         <div className="col-6">
                             <p>Email</p>
-                            <span>pascaltwoli@gmail.com</span>
+                            <span>{userData.email}</span>
                         </div>
-                        <div className="col-6">
+                        {/* <div className="col-6">
                             <p>Accupation</p>
                             <span>Software engineer</span>
-                        </div>
+                        </div> */}
                     </div>
                     <div>
                         <button className="btn btn-primary">Update</button>
@@ -86,7 +143,7 @@ const ManageSettings = () => {
                             isToggled={notifications.notification3}
                             onToggle={() => handleToggle("notification3")}
                             />
-                            </span>
+                            </span> 
                         </div>    
                         <div className="">
                             <p>Toggle Display</p>

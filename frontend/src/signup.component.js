@@ -19,7 +19,7 @@ export default function Signup() {
         username: '',
         email: '',
         password: '',
-		phoneNumber: '',
+		phone: '',
     });
 
     // const [loading, setLoading] = useState(false);
@@ -41,11 +41,11 @@ export default function Signup() {
     //handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault(); //prevent default form behavior;
-		const { username, email, phoneNumber, password } = formData;
+		const { username, email, phone, password } = formData;
 
         try {
-			await handleSignupToManageNest(username, email, phoneNumber, password);
-			alert('Signup successful!');  // Optional: Can also redirect here if needed
+			await handleSignupToManageNest(username, email, phone, password);
+			alert('Signup successful!');  
             // const response = await fetch ('https://example.com/api/form-submit', {
             //     method: 'POST',
             //     headers: {
@@ -127,6 +127,7 @@ export default function Signup() {
                                     onChange={handleInputChange}
 									placeholder="Enter your name"
 									className="form-input"
+									required
 								/>
 							</Form.Group>
 							<Form.Group className="mb-3" controlId="formBasicphoneNumber">
@@ -134,15 +135,16 @@ export default function Signup() {
 									as="p"
 									variant="text-primary"
 									className="form-label text-primary">
-									Username
+									Phone number
 								</Form.Label>
 								<Form.Control
 									type="text"
-                                    name="phoneNumber"
-                                    value={formData.phoneNumber}
+                                    name="phone"
+                                    value={formData.phone}
                                     onChange={handleInputChange}
 									placeholder="Enter phone number"
 									className="form-input"
+									required
 								/>
 							</Form.Group>
 							<Form.Group className="mb-3" controlId="formBasicEmail">
@@ -159,6 +161,7 @@ export default function Signup() {
                                     onChange={handleInputChange}
 									placeholder="Enter email"
 									className="form-input"
+									required
 								/>
 							</Form.Group>
 							<Form.Group className="mb-3" controlId="formBasicPassword">
@@ -175,6 +178,7 @@ export default function Signup() {
                                     onChange={handleInputChange}
 									placeholder="Password"
 									className="form-input"
+									required
 								/>
 							</Form.Group>
 							<Form.Group className="mb-3" controlId="formBasicCheckbox">
