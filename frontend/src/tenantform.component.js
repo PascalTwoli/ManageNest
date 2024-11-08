@@ -1,8 +1,9 @@
 import { Form, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
 import { supabase } from "./helper/supabaseClient"; //import my superbase client
+import { addTenant } from "./services/tenantService";
 
-const TenantForm = () => {
+const TenantForm = ({onTenantAdded}) => {
 	//function to switch from the signup component to signin component
 	// const navigate = useNavigate();
 	// const handleSigninClick = () => {
@@ -10,7 +11,7 @@ const TenantForm = () => {
 	// };
 
 	// submitting the form to the server
-	const [formData, setFormData] = useState({
+	const [tenantData, setTenantData] = useState({
 		// tenantId: "",
 		//tenant info
 		tenantFirstName: "",
@@ -44,7 +45,7 @@ const TenantForm = () => {
 	//handle form input change
 	const handleInputChange = (e) => {
 		const { name, value } = e.target;
-		setFormData((preveData) => ({
+		setTenantData((preveData) => ({
 			...preveData,
 			[name]: value,
 		}));
@@ -55,18 +56,20 @@ const TenantForm = () => {
 		e.preventDefault();
 
 		try {
-			// using supababe *start*
+			const data = await addTenant(tenantData); // Call addTenant to insert data
+			setSuccess(true);
+			onTenantAdded(data[0]); // Optionally, update tenant list in parent component
 			//insert data into supabase
-			const {data, error} = await supabase
-				.from('tenants')
-				.insert([{...formData}]);
+			// const {data, error} = await supabase
+			// 	.from('tenants')
+			// 	.insert([{...tenantData}]);
 
 			if (error) {
 				console.error("Supabase error:", error.message); // Log full error details
 				setError(error.message); // Display exact error in UI
 				return; // Exit if there's an error
 			}
-			setFormData({
+			setTenantData({
 				tenantFirstName: "",
 				tenantLastName: "",
 				tenantPhoneNumber: "",
@@ -121,7 +124,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="text"
 						name="tenantFirstName"
-						value={formData.tenantFirstName}
+						value={tenantData.tenantFirstName}
 						onChange={handleInputChange}
 						placeholder="Enter the first name"
 						className="form-input"
@@ -137,7 +140,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="text"
 						name="tenantLastName"
-						value={formData.tenantLastName}
+						value={tenantData.tenantLastName}
 						onChange={handleInputChange}
 						placeholder="Last name"
 						className="form-input"
@@ -153,7 +156,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="number"
 						name="tenantPhoneNumber"
-						value={formData.tenantPhoneNumber}
+						value={tenantData.tenantPhoneNumber}
 						onChange={handleInputChange}
 						placeholder="Phone number"
 						className="form-input"
@@ -169,7 +172,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="email"
 						name="tenantEmail"
-						value={formData.tenantEmail}
+						value={tenantData.tenantEmail}
 						onChange={handleInputChange}
 						placeholder="Email"
 						className="form-input"
@@ -185,7 +188,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="number"
 						name="tenantNationalId"
-						value={formData.tenantNationalId}
+						value={tenantData.tenantNationalId}
 						onChange={handleInputChange}
 						placeholder="National Id"
 						className="form-input"
@@ -201,7 +204,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="text"
 						name="tenantOccupation"
-						value={formData.tenantOccupation}
+						value={tenantData.tenantOccupation}
 						onChange={handleInputChange}
 						placeholder="Occupation"
 						className="form-input"
@@ -217,7 +220,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="text"
 						name="tenantBlockName"
-						value={formData.tenantBlockName}
+						value={tenantData.tenantBlockName}
 						onChange={handleInputChange}
 						placeholder="Block name"
 						className="form-input"
@@ -233,7 +236,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="text"
 						name="tenantUnitName"
-						value={formData.tenantUnitName}
+						value={tenantData.tenantUnitName}
 						onChange={handleInputChange}
 						placeholder="Unit name"
 						className="form-input"
@@ -249,7 +252,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="date"
 						name="tenantMoveInDate"
-						value={formData.tenantMoveInDate}
+						value={tenantData.tenantMoveInDate}
 						onChange={handleInputChange}
 						placeholder="Move in date"
 						className="form-input"
@@ -267,7 +270,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="number"
 						name="securityDeposit"
-						value={formData.securityDeposit}
+						value={tenantData.securityDeposit}
 						onChange={handleInputChange}
 						placeholder="e.g. 73200"
 						className="form-input"
@@ -283,7 +286,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="number"
 						name="monthlyRent"
-						value={formData.monthlyRent}
+						value={tenantData.monthlyRent}
 						onChange={handleInputChange}
 						placeholder="e.g. 40400"
 						className="form-input"
@@ -299,7 +302,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="number"
 						name="prevMonthRent"
-						value={formData.prevMonthRent}
+						value={tenantData.prevMonthRent}
 						onChange={handleInputChange}
 						placeholder="e.g. 40400"
 						className="form-input"
@@ -315,7 +318,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="date"
 						name="leaseStartDate"
-						value={formData.leaseStartDate}
+						value={tenantData.leaseStartDate}
 						onChange={handleInputChange}
 						placeholder="e.g. 12/10/2024"
 						className="form-input"
@@ -331,7 +334,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="date"
 						name="leaseEndDate"
-						value={formData.leaseEndDate}
+						value={tenantData.leaseEndDate}
 						onChange={handleInputChange}
 						placeholder="e.g. 12/11/2024"
 						className="form-input"
@@ -347,7 +350,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="text"
 						name="leaseStatus"
-						value={formData.leaseStatus}
+						value={tenantData.leaseStatus}
 						onChange={handleInputChange}
 						placeholder="Active/Expired/Terminated"
 						className="form-input"
@@ -363,7 +366,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="text"
 						name="propertyAddress"
-						value={formData.propertyAddress}
+						value={tenantData.propertyAddress}
 						onChange={handleInputChange}
 						placeholder="e.g. King Garden"
 						className="form-input"
@@ -379,7 +382,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="text"
 						name="residenceType"
-						value={formData.residenceType}
+						value={tenantData.residenceType}
 						onChange={handleInputChange}
 						placeholder="Apartment/House/Condo/Other"
 						className="form-input"
@@ -395,7 +398,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="number"
 						name="bedroomNumber"
-						value={formData.bedroomNumber}
+						value={tenantData.bedroomNumber}
 						onChange={handleInputChange}
 						placeholder="e.g. 3"
 						className="form-input"
@@ -411,7 +414,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="number"
 						name="bathroomNumber"
-						value={formData.bathroomNumber}
+						value={tenantData.bathroomNumber}
 						onChange={handleInputChange}
 						placeholder="e.g. 2"
 						className="form-input"
@@ -427,7 +430,7 @@ const TenantForm = () => {
 					<Form.Control
 						type="email"
 						name="additionalTerms"
-						value={formData.additionalTerms}
+						value={tenantData.additionalTerms}
 						onChange={handleInputChange}
 						as="textarea"
 						rows={3}
