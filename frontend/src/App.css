@@ -597,6 +597,11 @@ thead tr{
   padding: 10px 1px !important;
 }
 
+.payment-btn{
+  cursor: pointer;
+}
+
+
 
 /* ---------settings.component.js ----------- */
 

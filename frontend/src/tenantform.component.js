@@ -3,7 +3,7 @@ import { useState } from "react";
 import { supabase } from "./helper/supabaseClient"; //import my superbase client
 import { addTenant } from "./services/tenantService";
 
-const TenantForm = ({onTenantAdded}) => {
+const TenantForm = () => {
 	//function to switch from the signup component to signin component
 	// const navigate = useNavigate();
 	// const handleSigninClick = () => {
@@ -58,7 +58,7 @@ const TenantForm = ({onTenantAdded}) => {
 		try {
 			const data = await addTenant(tenantData); // Call addTenant to insert data
 			setSuccess(true);
-			onTenantAdded(data[0]); // Optionally, update tenant list in parent component
+			// onTenantAdded(data[0]); // Optionally, update tenant list in parent component
 			//insert data into supabase
 			// const {data, error} = await supabase
 			// 	.from('tenants')
