@@ -1,13 +1,18 @@
 import { Table, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { fetchTenants } from "./services/tenantService";
+import PaymentsOffcanvas from "./payments_offcanvas.component";
 
 const ReportsOverview = () => {
+    const [showOffcanvas, setShowOffcanvas] = useState (false);
 
     const [loading, setLoading] = useState();
 
     //State to store table data (array of rows)
     const [tenantData, setTenantData] = useState ([]);
+
+    const handleShow = () => setShowOffcanvas(true);
+    const handleClose = () => setShowOffcanvas(false);
 
     useEffect (() => {
         const loadReports = async () => {
@@ -69,7 +74,10 @@ const ReportsOverview = () => {
                                 <span>{row.monthlyRent}</span>
                             </td>   
                             <td> 48000</td>
-                            <td> Delete</td>
+                            <td className="payment-btn" onClick={handleShow} >
+                                Make payment
+                            </td>
+                            <PaymentsOffcanvas show={showOffcanvas} handleClose={handleClose}/>
                         </tr>
                     ))
                 ):(
