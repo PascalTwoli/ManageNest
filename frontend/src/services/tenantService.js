@@ -107,3 +107,19 @@ export const transactionRef = async () => {
 	idStr = idStr.slice(0, idStrLen);
 	return idStr;
 };
+
+//fetching payments records from the database
+export const fetchPayments = async (tenantId) => {
+	try {
+		const {data, error} = await supabase
+		.from('payments')
+		.select('*')
+		.eq('tenantId', tenantId)
+		if (error) {
+			throw error;
+		}
+	} catch (error) {
+		console.error("Error fetching payments:", error.message);
+		return null;
+	}
+}

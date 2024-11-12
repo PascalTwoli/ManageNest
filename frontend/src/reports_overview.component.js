@@ -1,15 +1,17 @@
 import { Table, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import { fetchTenants } from "./services/tenantService";
+import { fetchPayments, fetchTenants } from "./services/tenantService";
 import PaymentsOffcanvas from "./payments_offcanvas.component";
+import { supabase } from "./helper/supabaseClient";
 
-const ReportsOverview = () => {
+const ReportsOverview = ({tenantId}) => {
     const [showOffcanvas, setShowOffcanvas] = useState (false);
 
     const [loading, setLoading] = useState();
 
     //State to store table data (array of rows)
     const [tenantData, setTenantData] = useState ([]);
+    const [payments, setPayments] = useState ([]);
 
     const handleShow = () => setShowOffcanvas(true);
     const handleClose = () => setShowOffcanvas(false);
@@ -23,9 +25,19 @@ const ReportsOverview = () => {
         }
 
         loadReports();
-        // const storedData = JSON.parse(localStorage.getItem('tenantFormData')) || [];
-        // if (storedData) {setTenantData(storedData);}
     },[])
+
+    useEffect (() => {
+        const loadPayments = async () => {
+            setLoading (true);
+            const data = await fetchPayments(tenantId)
+            setPayments (data || []);
+            setLoading(false);
+            console.log("payment data include: ",  tenantId)
+        }
+        
+        loadPayments();
+    }, []); // fetch payments whenever tenantId changes
 
     function getDate () {
         const today = new Date();
@@ -67,12 +79,23 @@ const ReportsOverview = () => {
                             <td>{row.tenantFirstName +
                                     " " +
                                     row.tenantLastName}</td>
-                            <td className="td-center d-flex"> 
-                                <span>{getDate()}</span>
-                                <span> Cash</span>
-                                <span>sqwjj43jds</span>
-                                <span>{row.monthlyRent}</span>
-                            </td>   
+                            {payments.length > 0 ? (
+                                payments.map((pay_row, pay_index) => (
+                                    <td className="td-center d-flex" key={pay_index}> 
+                                        <span>{getDate()}</span>
+                                        <span>{pay_row.paymentMethod}</span>
+                                        <span>{pay_row.transactionRef}</span>
+                                        <span>{pay_row.rentAmount}</span>
+                                    </td>
+                                ))
+                            ): (
+                            <tr>
+                                 <td colSpan="6" className="text-center">
+                                     No payment details found.
+                                 </td>
+                             </tr>
+                            )}
+             
                             <td> 48000</td>
                             <td className="payment-btn" onClick={handleShow} >
                                 Make payment

@@ -28,9 +28,12 @@ function PaymentsOffcanvas({ show, handleClose }) {
     const handleSubmit = async (e) => {
        try {
         e.preventDefault()
+            const tenant = await supabase.from('tenants').select('*');
+            const tenantId = tenant.tenantId;
+
             const {data, error} = await supabase
             .from("payments")
-            .insert([{...contactData}])
+            .insert([{...contactData, tenantId}])
 
             if (error) {
 				console.error("Supabase error:", error.message); //log full error details
