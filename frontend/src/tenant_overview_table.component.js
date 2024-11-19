@@ -3,14 +3,12 @@ import photos from "./photos.jpg";
 import { BsThreeDots } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import TenantProfilesOffcanvas from "./tenant_profiles_offcanvas.component";
-import { supabase } from "./helper/supabaseClient";
 import {
 	fetchTenants,
 	deleteTenant,
 	updateTenant,
 } from "./services/tenantService";
 
-import { Alert } from "react-bootstrap";
 
 //  generating a character unique code
 const generateUniqueCode = () => {
@@ -22,7 +20,7 @@ const generateUniqueCode = () => {
 	return code;
 };
 
-const TenantOverviewTable = () => {
+const TenantOverviewTable = ({onSelectTenant}) => {
 	const [activeItem, setActiveItem] = useState();
 	const [activeItemIndex, setActiveItemIndex] = useState();
 
@@ -51,8 +49,10 @@ const TenantOverviewTable = () => {
 		setActiveItem(() => itemToShow);
 		setActiveItemIndex(() => itemIndex);
 		setShowOffcanvas(true);
+		onSelectTenant(() => itemToShow.tenantId) //notify Maincontent of the selected tenant ID
+		console.log("here the tenant id is: ", itemToShow.tenantId );
 	};
-
+	
 	const handleClose = () => setShowOffcanvas(false);
 
 	//updatig tenant data__*

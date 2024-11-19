@@ -1,15 +1,8 @@
 import { Form, Button, Alert } from "react-bootstrap";
 import { useState } from "react";
-import { supabase } from "./helper/supabaseClient"; //import my superbase client
 import { addTenant } from "./services/tenantService";
 
 const TenantForm = () => {
-	//function to switch from the signup component to signin component
-	// const navigate = useNavigate();
-	// const handleSigninClick = () => {
-	// 	navigate("/signin");
-	// };
-
 	// submitting the form to the server
 	const [tenantData, setTenantData] = useState({
 		// tenantId: "",

@@ -1,16 +1,15 @@
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { Form, Alert, Button } from 'react-bootstrap';
 import { useState } from 'react';
-import { supabase } from './helper/supabaseClient';
-import { transactionRef } from './services/tenantService';
+import { addPayments  } from './services/tenantService';
 
-function PaymentsOffcanvas({ show, handleClose }) {
+function PaymentsOffcanvas({ show, handleClose, tenantId }) {
 
     const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	const [success, setSuccess] = useState(false);
 
-    const [contactData, setContactData] = useState({
+    const [paymentData, setPaymentData] = useState({
         // paymentDate: "",
         paymentMethod: "",
         transactionRef: "",
@@ -19,29 +18,25 @@ function PaymentsOffcanvas({ show, handleClose }) {
 
     const handleInputChange = (e) => {
 		const { name, value } = e.target;
-		setContactData((preveData) => ({
+		setPaymentData((preveData) => ({
 			...preveData,
 			[name]: value,
 		}));
 	};
 
     const handleSubmit = async (e) => {
-       try {
         e.preventDefault()
-            const tenant = await supabase.from('tenants').select('*');
-            const tenantId = tenant.tenantId;
+        try {
+            console.log("tenant id:", tenantId, "paymentData", paymentData);
+            // call addPayments with tenantId and paymentData
+            const data = await addPayments(tenantId, paymentData)
+            setSuccess(true);
 
-            const {data, error} = await supabase
-            .from("payments")
-            .insert([{...contactData, tenantId}])
+            setSuccess(true);
+            setError(null);
+			alert("Payment submitted successfully!")
 
-            if (error) {
-				console.error("Supabase error:", error.message); //log full error details
-				setError(error.message); 
-				return; // Exit if there's an error
-			}
-
-            setContactData({
+            setPaymentData({
         
                 // paymentDate: "",
                 paymentMethod: "",
@@ -49,13 +44,9 @@ function PaymentsOffcanvas({ show, handleClose }) {
                 rentAmount: "",
             });
             
-            setSuccess(true)
-            setError(null);
-			alert("Data submitted successfully!")
-            
        } catch (error) {
         console.error("Error submitting the form: ", error);
-        setError("Error submitting the form");
+        setError("Error submitting the payment");
        }
     }
   return (
@@ -68,9 +59,9 @@ function PaymentsOffcanvas({ show, handleClose }) {
         
         <Form onSubmit={handleSubmit} className="row">
             {error && <Alert variant="danger">{error}</Alert>}
-            {success && (
+            {success && 
                 <Alert variant="success">Tenant data submitted to the database successfully!</Alert>
-            )}
+            }
             {/* <Form.Group className="mb-3 col-4" controlId="">
                 <Form.Label
                     as="p"
@@ -81,7 +72,7 @@ function PaymentsOffcanvas({ show, handleClose }) {
                 <Form.Control
                     type="text"
                     name="paymentDate"
-                    value={contactData.paymentDate}
+                    value={paymentData.paymentDate}
                     onChange={handleInputChange}
                     placeholder=""
                     className="form-input"
@@ -97,7 +88,7 @@ function PaymentsOffcanvas({ show, handleClose }) {
                 <Form.Control
                     type="text"
                     name="rentAmount"
-                    value={contactData.rentAmount}
+                    value={paymentData.rentAmount}
                     onChange={handleInputChange}
                     placeholder=""
                     className="form-input"
@@ -113,7 +104,7 @@ function PaymentsOffcanvas({ show, handleClose }) {
                 <Form.Control
                     type="text"
                     name="paymentMethod"
-                    value={contactData.paymentMethod}
+                    value={paymentData.paymentMethod}
                     onChange={handleInputChange}
                     placeholder=""
                     className="form-input"
@@ -129,7 +120,7 @@ function PaymentsOffcanvas({ show, handleClose }) {
                 <Form.Control
                     type="text"
                     name="transactionRef"
-                    value={contactData.transactionRef}
+                    value={paymentData.transactionRef}
                     onChange={handleInputChange}
                     placeholder=""
                     className="form-input"

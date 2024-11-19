@@ -1,8 +1,4 @@
-import { useState } from "react";
 import { supabase } from "../helper/supabaseClient";
-import { createClient } from "@supabase/supabase-js";
-
-// const [error, setError] = useState(null);
 
 //function to add new tenant to the database
 export const addTenant = async (tenantData) => {
@@ -108,9 +104,42 @@ export const transactionRef = async () => {
 	return idStr;
 };
 
+//adding payments records to the database for a spefic tenant
+export const addPayments = async (tenantId, paymentData) => {
+
+	try {
+		const {data, error} = await supabase
+		.from("payments")
+		.insert([
+			{
+				tenantId: tenantId,  // add tenantId as a foreign key
+				...paymentData       //spread other payment details
+			}
+		])
+	
+		if (error) {
+			console.error("Supabase error:", error.message); //log full error details
+			return null;  // exit if there's an error
+		}
+	
+		console.log("Payment added successfully:", data);
+		return data;
+		
+	} catch (error) {
+		console.error("Error adding payment:", error.message);
+    	return null;
+	}
+	
+}
+
 //fetching payments records from the database
 export const fetchPayments = async (tenantId) => {
 	try {
+		if (!tenantId) {
+			console.error("Invalid tenantId and not found:", tenantId);
+			return []; // return an empty array if tenantId is invalid
+		}
+	
 		const {data, error} = await supabase
 		.from('payments')
 		.select('*')
@@ -118,6 +147,7 @@ export const fetchPayments = async (tenantId) => {
 		if (error) {
 			throw error;
 		}
+		return data
 	} catch (error) {
 		console.error("Error fetching payments:", error.message);
 		return null;
